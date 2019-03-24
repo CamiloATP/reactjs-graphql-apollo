@@ -27,7 +27,16 @@ app.get('/', (req, res) => {
 });
 
 // El Resolver
-const root = {hola: () => "Hola mundo desde GraphQL"};
+const root = {cliente: () => {
+        return {
+            "id": 12345678,
+            "nombre": "Aquiles",
+            "apellido": "Bailo",
+            "empresa": "DDR",
+            "email": "aquiles.bailo@gmail.com"
+        }
+    }
+};
 
 //////////////////////////////////////////////////////////////////////
 // Este ejemplo muestra una función de middleware sin ninguna vía de 

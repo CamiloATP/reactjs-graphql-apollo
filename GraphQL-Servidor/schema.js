@@ -1,8 +1,15 @@
 import {buildSchema} from 'graphql';
 
 const schema = buildSchema(`
-    type Query{
-        hola: String
+    type Cliente{
+        id: ID
+        nombre: String
+        apellido: String
+        empresa: String
+        email: String
+    }
+    type Query {
+        cliente: Cliente
     }
 `);
 
