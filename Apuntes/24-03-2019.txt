@@ -3,3 +3,61 @@ Para correr nodemon
 
 ---
 
+TypeChecking y Campos Anidados en GraphQL
+
+Los tipos de objetos y el TypeChecking
+
+---
+Schema
+
+type Cliente{
+        id: ID
+        nombre: String
+        apellido: String
+        empresa: String
+        emails: [Email]
+}
+
+type Email{
+        email: String
+}
+
+type Query {
+      cliente: Cliente
+}   
+
+---
+
+{
+  	cliente{
+    		id
+    		nombre
+   		emails {
+      			email
+    		}
+  	}
+}
+
+---
+
+{
+  "data": {
+    	"cliente": {
+      		"id": "12345678",
+      		"nombre": "Aquiles",
+      		"emails": [
+        			{
+         	 			"email": "aquiles.bailo@gmail.com"
+        			},
+        			{
+          				"email": "a.bailo@gmail.com"
+        			}
+      		]
+    	}
+  }
+}
+
+
+
+
+
