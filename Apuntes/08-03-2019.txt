@@ -1,0 +1,187 @@
+Graph = Graph Query language, similar a sql, ya que es utilizado para 
+realizar consultas.
+
+Para utilizarlo, realizar consultas y leer los resultados, deberas tener
+GraphQL instalado en tu servidor.
+
+Inventado por Facebook como una necesidad para obtener datos del 
+servidor.
+
+Desarrollado en 2012 pero open source desde 2015.
+
+Independiente de cualquier lenguaje o libreria pero muy relacionado con
+react
+
+Pinterest, shopify, github, coursera utilizan GraphQL hoy en día.
+
+---
+
+GraphQL  y SQL
+
+No hay nada de malo con sql, es excelente para datos relacionados y para
+muchas aplicaciones sql es la opción adecuada.
+
+Utilizar GraphQL no es con el fin de dejar de utilizar una base de datos sql
+o no sql.
+
+SQL es un lenguaje que ha estado por 40 años y seguramente estará por 
+otros 40 más.
+
+GraphQL nace como una alternativa de sql para obtener los datos que se
+requiren.
+
+Fue Inventado por facebook debido a que con sql era complicado obtener 
+las entradas de las personas, después de sus amigos, de los amigos de sus 
+amigos, y los amigos de los amigos de sus amigos.
+
+En GraphQL hay separación entre la base de datos y el cliente.
+
+GraphQL corre sobre bases de datos ya sea MongoDB, Redis, MySQL, SQL, 
+PostgreSQL.
+
+También GraphQL se conecta a cualquier ORM - Mongoose, Sequelize, 
+Doctrine.
+
+Puedes utilizar GraphQL sobre tu base de datos ya existente.
+
+---
+
+La Rest APIs no tienen nada de malo, pero encontrarás grandes beneficios 
+en GraphQL. Este es desarrollado pensando en el performance, en 
+utilizar únicamente los datos que necesitamos.
+
+El problema de las REST APIs
+
+/autos/
+/autos/marca/
+/autos/marca/2015/automatico/
+/autos/marca/2012/4_cilindros/
+/autos/marca/2008/4_puertas/
+
+Muchos endpoints.
+
+En GraphQL
+
+query {
+	autos(year: 2008) {
+		marca
+		modelo
+		transmision
+		puertas
+	}
+}
+
+---
+
+query {
+	autos(year: 2012, marca: "BMW") {
+		marca
+		modelo
+		transmision
+		puertas
+	}
+}
+
+---
+
+Entre sus beneficios encontrarás que puedes realizar consultas y mostrar 
+los datos que necesitas.
+
+No requires crear nuevos endpoints.
+
+No importa la versión ya que siempre es compatible con versiones 
+anteriores.
+
+Se puede instalar sobre una API o base de datos ya existente.
+
+Independiente del lenguaje.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,220 @@
+
+ORM = Object-Relational mapping(Mapeo objeto relacional)
+
+Terminología de GraphQL
+---
+
+Query
+
+En un crud un query nos permite leer los registros.
+
+Es la forma de extraer la información existente desde la bd o rest API.
+
+Equivalente a un select de sql o un get de una rest API.
+
+En el query declaras que campos o datos vas a requerir para tu consulta y también soporta parámetros.
+
+El query en GraphQL es universal, por lo tanto es igual en angular, node o react o si la bd en nosql o sql.
+
+Ejemplo de query
+
+query {
+	obtenerProductos{
+		id
+		nombre
+		precio
+		stock
+	}
+}
+
+result
+---
+{
+	"data": {
+		"obtenerProductos": [
+			{
+				"id": "afsdlfhah32434"
+				"nombre": "Computadora Laptop",
+				"precio": 2000,
+				"stock": 1000
+			},
+			{
+				"id": "ferwefs2"
+				"nombre": "Macbook",
+				"precio": 2000,
+				"stock": 10
+			}
+		]
+	}
+}
+---
+
+Mutation
+
+Mutation se utiliza para las otras 3 acciones de crud: 
+	- Actualizar
+	- Eliminar
+	- Crear registros
+
+Similares a un put / patch, delete o post de una rest API o un delete, update e insert de SQL.
+
+Igual que el query son independientes del lenguaje, así que son iguales si tu backend es node, php o
+python o si tu base de datos es SQL o noSQL.
+
+
+Ejemplo de Mutation
+
+mutation eliminarProducto($id: ID) {
+	eliminarProducto(id: $id)
+}
+
+result
+---
+{
+	"data": {
+		"eliminarProducto": "Se eliminó correctamente"
+	}
+}
+
+---
+
+Resolvers
+
+Queries y mutations por si solos no hacen mucho, requiren un backend para realizar las operaciones en la
+bd, para ello se utilizan los resolvers, pueden estar escritos también en cualquier lenguaje y sobre 
+cualquier bd.
+
+A diferencia de las queries y los mutations, el resolver es especifico del lenguaje que utilices y las 
+interacciones a la base de datos también lo son.
+
+Ejemplo de resolver
+
+getCliente :  (root, {id}) => {
+	return new Promise((resolve, object) => {
+                                          // Clientes <- modelo de mogoDB - findById <-método de ORM mongus
+		Clientes.findById(id, (error, cliente) => {
+			if(error) rejects(error)
+			else resolve(cliente)
+		});
+	});
+}
+
+Schema
+
+Es lo que describe tus tipos de objeto, queries y datos de tu aplicación.
+
+El Schema en GraphQL utiliza un typing en el que le defines si un campo será de tipo string, int, boolean, 
+etc.
+
+El Schema y el resolver están muy relacionados, el schema define la forma de los datos mientras que el
+resolver la comunicación con el lenguaje del servidor y la bd.
+
+Ejemplo Schema
+
+type Cliente {
+	id: ID
+	nombre: String
+	apellido: String
+	empresa: String
+	emails: [Email]
+	edad: Int
+}
+
+type Email {
+	email: String
+}
+
+*.- Esta estructura debe ser similar a la de tu base de datos
+
+Schema y Resolver
+
+// Schema
+type Query {
+	getCliente(id: ID) : Cliente
+}
+
+// Resolver exclusivo del lenguaje de programación, la bd -> mongoDB y ORM mongus
+getCliente :  (root, {id}) => {
+	return new Promise((resolve, object) => {
+                                          // Clientes <- modelo de mogoDB - findById <-método de ORM mongus
+		Clientes.findById(id, (error, cliente) => {
+			if(error) rejects(error)
+			else resolve(cliente)
+		});
+	});
+}
+
+type Cliente {
+	id: ID
+	nombre: String
+	apellido: String
+	empresa: String
+	emails: [Email]
+	edad: Int
+}
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

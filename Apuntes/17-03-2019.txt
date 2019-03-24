@@ -1,0 +1,69 @@
+
+Creando un servidor de GraphQL
+
+> Eligiendo un editor de código
+
+> Visual Studio Code
+	> Extensiones que instalar
+		> GraphQL for VSCode -> author Kumar Harsh
+		> GraphQL -> author dsznajder
+		> GraphQL -> author Prisma
+		> GraphQL Language Support -> author stpn
+		> Prettier Now -> author Remi Marsal
+
+> Instalar node.js
+
+---
+
+/* Crear el package.json */
+> npm init
+
+/* Intalar de pendencia de nodemon y express.js */
+/* nodemon cada cambio en los archivos del servidor nodemon lo va a recarga en el navegador */
+/* express para montar el servidor para GraphQL */
+> npm install --save nodemon express
+
+/* EMAC 6 */
+> npm install --save-dev babel-cli babel-preset-env babel-preset-stage-0
+
+/*Se crea un archivo llamado .babelrc con el siguiente code */
+{
+    "presets":[
+        "env",
+        "stage-0"
+    ]
+}
+
+/* Para ejecutar EMAC 6 con node.js  en el archivo package.js */
+"scripts": {
+    "start": "nodemon ./index.js --exec babel-node -e js"
+  },
+
+---
+
+/* Instalar express-graphql y graphql */
+npm install --save express-graphql graphql
+
+Es utiliza template literal -> ` `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

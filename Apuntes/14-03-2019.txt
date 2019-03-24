@@ -1,0 +1,323 @@
+
+Queries y queries con Argumentos
+
+GitHub GraphQL API --> GraphiQl <-- Herramienta para aprender GraphQL
+
+GraphQLHub <-- Herramienta para aprender GraphQL
+---
+
+ GraphiQl
+
+query {
+  viewer {
+    id
+    name
+    company
+    createdAt
+    avatarUrl
+  }
+}
+---
+
+Result
+
+{
+  "data": {
+    "viewer": {
+      "id": "MDQ6VXNlcjI0OTY1NzQ1",
+      "name": "Camilo Tapia",
+      "company": "",
+      "createdAt": "2017-01-06T20:27:05Z",
+      "avatarUrl": "https://avatars1.githubusercontent.com/u/24965745?v=4"
+    }
+  }
+}
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GraphQLHub 
+
+/* 
+   La palabra reservada por decir query es opcional example 
+
+ {
+   twitter{
+     search(q: "GraphQL"){
+      text
+      retweet_count
+      created_at
+     }
+   }
+}
+*/
+
+query {
+	twitter{
+    search(q: "GraphQL"){
+      text
+      retweet_count
+      created_at
+    }
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "twitter": {
+      "search": [
+        {
+          "text": "Barry Dutton talks about Distributed @GraphQL as implemented at @creditkarma https://t.co/fPvlTJRKqU",
+          "retweet_count": 0,
+          "created_at": "Fri Mar 15 01:57:27 +0000 2019"
+        },
+        {
+          "text": "RT @ThePracticalDev: Covering:\n- Getting started with a ReasonReact project\n- Setting up a client with reason-apollo\n- Sending queries\n- Mu…",
+          "retweet_count": 2,
+          "created_at": "Fri Mar 15 01:54:03 +0000 2019"
+        },
+        {
+          "text": "RT @ThePracticalDev: Covering:\n- Getting started with a ReasonReact project\n- Setting up a client with reason-apollo\n- Sending queries\n- Mu…",
+          "retweet_count": 2,
+          "created_at": "Fri Mar 15 01:51:53 +0000 2019"
+        },
+        {
+          "text": "RT @CodementorIO: If you struggle with building a functional and stable MVP, then this is the article for you. \n\n?? https://t.co/YI9WXpRtB1…",
+          "retweet_count": 2,
+          "created_at": "Fri Mar 15 01:51:27 +0000 2019"
+        },
+        {
+          "text": "RT @SalarRahmanian: Amongst great friends at a great meetup #GraphQL #scala @sfscala @ChiefScientist https://t.co/TsRNY9Wor3",
+          "retweet_count": 1,
+          "created_at": "Fri Mar 15 01:49:14 +0000 2019"
+        },
+        {
+          "text": "Ya estamos iniciando con GraphQL @SwiftLang @iosdevsmx @NSCoderMexico @SwiftLDN @iosdevelopersmx  con Leonardo Dura… https://t.co/7bPqQGrEIQ",
+          "retweet_count": 0,
+          "created_at": "Fri Mar 15 01:49:03 +0000 2019"
+        },
+        {
+          "text": "Nick Nance, Head of Platform Software Engineering at @CreditKarmaEng, opens the joint @sfscala + SF GraphQL meetup… https://t.co/QG2CiwV6qt",
+          "retweet_count": 0,
+          "created_at": "Fri Mar 15 01:47:12 +0000 2019"
+        },
+        {
+          "text": "Amongst great friends at a great meetup #GraphQL #scala @sfscala @ChiefScientist https://t.co/TsRNY9Wor3",
+          "retweet_count": 1,
+          "created_at": "Fri Mar 15 01:47:11 +0000 2019"
+        },
+        {
+          "text": "RT @hasdid: #Kubernetes  #Automated | GraphQL in a Microservices Architecture https://t.co/3ylbdqCjqv",
+          "retweet_count": 1,
+          "created_at": "Fri Mar 15 01:47:10 +0000 2019"
+        },
+        {
+          "text": "#Kubernetes  #Automated | GraphQL in a Microservices Architecture https://t.co/3ylbdqCjqv",
+          "retweet_count": 1,
+          "created_at": "Fri Mar 15 01:47:02 +0000 2019"
+        },
+        {
+          "text": "Covering:\n- Getting started with a ReasonReact project\n- Setting up a client with reason-apollo\n- Sending queries\n-… https://t.co/23C8GfyntL",
+          "retweet_count": 2,
+          "created_at": "Fri Mar 15 01:45:00 +0000 2019"
+        },
+        {
+          "text": "GraphQL Visual Editor - ??????GraphQL??? https://t.co/1vnNdtPL09",
+          "retweet_count": 0,
+          "created_at": "Fri Mar 15 01:43:03 +0000 2019"
+        },
+        {
+          "text": "react + GraphQL????????????????????!\n???????Node + TypeScript????????????????^ ^\n\n??Apollo?mock?????????????Apollo??!!",
+          "retweet_count": 0,
+          "created_at": "Fri Mar 15 01:39:08 +0000 2019"
+        },
+        {
+          "text": "RT @laredoj: IBM behind the GraphQL Foundation, @erikwittern to lead the way! https://t.co/dnAr4yesmy  #GraphQL #IBM #OASGraph",
+          "retweet_count": 1,
+          "created_at": "Fri Mar 15 01:38:49 +0000 2019"
+        },
+        {
+          "text": "RT @freeCodeCamp: Why headless CMS and GraphQL are a natural fit, by @couellet https://t.co/XaaYlXE5GR",
+          "retweet_count": 4,
+          "created_at": "Fri Mar 15 01:37:35 +0000 2019"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Más Sobre queries con Argumentos y donde encontrar los Argumentos
+
+---
+
+GraphiQL
+
+{
+  repositoryOwner(login: "CamiloATP"){
+    id
+    url
+    resourcePath
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "repositoryOwner": {
+      "id": "MDQ6VXNlcjI0OTY1NzQ1",
+      "url": "https://github.com/CamiloATP",
+      "resourcePath": "/CamiloATP"
+    }
+  }
+}
+---
+
+{
+  repositoryOwner(login: "google"){
+    id
+    url
+    resourcePath
+  }
+}
+---
+
+Result
+
+{
+  "data": {
+    "repositoryOwner": {
+      "id": "MDEyOk9yZ2FuaXphdGlvbjEzNDIwMDQ=",
+      "url": "https://github.com/google",
+      "resourcePath": "/google"
+    }
+  }
+}
+---
+
+GraphQLHub
+
+{
+  hn{
+    topStories(limit: 3, offset: 1){
+      id      
+      title
+      text
+      url
+      deleted
+    }
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "hn": {
+      "topStories": [
+        {
+          "id": "19395578",
+          "title": "Dynamic Programming for Technical Interviews",
+          "text": null,
+          "url": "https://blogarithms.github.io/articles/2019-03/cracking-dp-part-one",
+          "deleted": null
+        },
+        {
+          "id": "19389983",
+          "title": "Rudder issue that plagued the Boeing 737 throughout the 1990s",
+          "text": null,
+          "url": "https://m.imgur.com/a/5wcFx8M",
+          "deleted": null
+        },
+        {
+          "id": "19391476",
+          "title": "DARPA Is Building a $10M, Open-Source, Secure Voting System",
+          "text": null,
+          "url": "https://motherboard.vice.com/en_us/article/yw84q7/darpa-is-building-a-dollar10-million-open-source-secure-voting-system",
+          "deleted": null
+        }
+      ]
+    }
+  }
+}
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

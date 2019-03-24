@@ -1,0 +1,926 @@
+Argumentos obligatorios y como identificarlos
+
+Se identifican por el signo ! en el argumento o parametro identificandolo como obligatorio 
+para realizar dicha consulta a la api de GraphQL.
+---
+
+GraphiQl 
+
+{
+  repository(name: "graphql", owner: "facebook"){
+    id
+    url
+    description
+  }
+}
+
+---
+
+{
+  repository(name: "fonts", owner: "google"){
+    id
+    url
+    description
+  }
+}
+
+---
+
+GraphQLHub
+
+{
+  hn{
+    topStories{
+      id
+      title
+      url
+      type
+      time
+    }
+  }
+}
+
+---
+
+Schema GraphQL
+
+Son los objetos, entidades, que se pueden extraer de la api, en el caso de GraphQL 
+funcionan como consulta a la base de datos con o sin argumentos(parametros) y relaciones de tablas
+
+---
+
+{
+  hn{
+    newStories(limit: 3){
+      id
+      title
+      text
+      url
+      type
+      time
+      score      
+    }
+  }
+}
+
+---
+
+{
+  "data": {
+    "hn": {
+      "newStories": [
+        {
+          "id": "19408434",
+          "title": "Marxism and Religion",
+          "text": null,
+          "url": "http://churchlife.nd.edu/2019/01/25/marxism-and-religion/",
+          "type": "story",
+          "time": 1552752128,
+          "score": 1
+        },
+        {
+          "id": "19408431",
+          "title": "Rustgo: Calling Rust from Go with near-zero overhead",
+          "text": null,
+          "url": "https://blog.filippo.io/rustgo/",
+          "type": "story",
+          "time": 1552752055,
+          "score": 1
+        },
+        {
+          "id": "19408427",
+          "title": "Ten Simple Truths",
+          "text": null,
+          "url": "https://twitter.com/naval/status/1106783366907453440",
+          "type": "story",
+          "time": 1552752039,
+          "score": 1
+        }
+      ]
+    }
+  }
+}
+
+---
+
+{
+  twitter{
+    search(q: "Java", count: 2){
+      id
+      text
+      user {
+        id
+        name
+      }
+      created_at
+    }
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "twitter": {
+      "search": [
+        {
+          "id": "1106950479484014600",
+          "text": "RT @Payara_Fish: This blog by @rdebusscher explores the new @MicroProfileIO Starter that was recently launched. You can use any of the impl…",
+          "user": {
+            "id": "2657751268",
+            "name": "José Luis Manriquez"
+          },
+          "created_at": "Sat Mar 16 16:08:55 +0000 2019"
+        },
+        {
+          "id": "1106950472429158400",
+          "text": "@pantulis @domingogallardo @xataka Que el paradigma de programación imperante casi por doquier sea el de aplicacion… https://t.co/Fg1xJuGBoI",
+          "user": {
+            "id": "62963",
+            "name": "JJ Merelo"
+          },
+          "created_at": "Sat Mar 16 16:08:53 +0000 2019"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Alias en las queries
+
+{
+  twitter{
+    Javatweet: search(q: "Java", count: 1){
+      id
+      text
+      user {
+        id
+        name
+      }
+      created_at
+    }    
+    RoRtweet: search(q: "Ruby On Rails", count: 1){
+      id
+      text
+      user {
+        id
+        name
+      }
+      created_at
+    }
+    ReactJStweet: search(q: "ReactJS", count: 1){
+      id
+      text
+      user {
+        id
+        name
+      }
+      created_at
+    }
+  }
+}
+
+---
+Result
+
+{
+  "data": {
+    "twitter": {
+      "Javatweet": [
+        {
+          "id": "1106953638239305700",
+          "text": "RT @gp_pulipaka: Introduction to Statistical Learning (ISLR) in R. #BigData #Analytics #DataScience #AI #MachineLearning #IoT #IIoT #PyTorc…",
+          "user": {
+            "id": "869794196294520800",
+            "name": "Machine Learning"
+          },
+          "created_at": "Sat Mar 16 16:21:28 +0000 2019"
+        }
+      ],
+      "RoRtweet": [
+        {
+          "id": "1106953353773441000",
+          "text": "https://t.co/2ssHXcL4Qc https://t.co/IjPeQ17zXK",
+          "user": {
+            "id": "1095756572918206500",
+            "name": "Code Talk"
+          },
+          "created_at": "Sat Mar 16 16:20:20 +0000 2019"
+        }
+      ],
+      "ReactJStweet": [
+        {
+          "id": "1106953666039152600",
+          "text": "RT @gp_pulipaka: Simple Python Code: Multiply 2d #Numpy Array Corresponding to 1d Array. #BigData #Analytics #DataScience #IoT #IIoT #PyTor…",
+          "user": {
+            "id": "949311959735791600",
+            "name": "Raymond460"
+          },
+          "created_at": "Sat Mar 16 16:21:34 +0000 2019"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Consultas con Fragments
+
+{
+  twitter{
+    Javatweet: search(q: "Java", count: 1){
+      ...camposTweet
+    }    
+    RoRtweet: search(q: "Ruby On Rails", count: 1){
+      ...camposTweet
+    }
+    ReactJStweet: search(q: "ReactJS", count: 1){
+      ...camposTweet
+      user{
+        id
+        name
+      }
+    }
+  }
+}
+
+
+fragment camposTweet on Tweet {
+  id
+  text
+  created_at
+}
+
+---
+
+Result 
+
+{
+  "data": {
+    "twitter": {
+      "Javatweet": [
+        {
+          "id": "1106959984166756400",
+          "text": "???????????? ????????? #???????????????",
+          "created_at": "Sat Mar 16 16:46:41 +0000 2019"
+        }
+      ],
+      "RoRtweet": [
+        {
+          "id": "1106956562587897900",
+          "text": "On Thursday the Tech Talent South - Raleigh meetup is hosting #Ruby on Rails: Build your First App at HQ Raleigh. I… https://t.co/MXYXmMozgq",
+          "created_at": "Sat Mar 16 16:33:05 +0000 2019"
+        }
+      ],
+      "ReactJStweet": [
+        {
+          "id": "1106959927795478500",
+          "text": "RT @Nitish_Sharma23: How CEO Fraud Impacts You - #infographic\n#DeepLearning #KSQL #MQTT #IoT #Sensor #BigData #Analytics #MachineLearning #…",
+          "created_at": "Sat Mar 16 16:46:27 +0000 2019",
+          "user": {
+            "id": "310897418",
+            "name": "Aaron Cuddeback"
+          }
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Campos anidados
+
+{
+  twitter{
+    Javatweet: search(q: "Java", count: 1){
+      id
+      text
+      created_at
+      user{
+      	id
+        name
+        followers_count
+      }
+    }
+  }    
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "twitter": {
+      "Javatweet": [
+        {
+          "id": "1106989528693334000",
+          "text": "@AdamBien @javajuneau Java frameworks coming out nearly as fast as JavaScript. Used to be choice of Spring or JEE b… https://t.co/Wlw0G8Ll4i",
+          "created_at": "Sat Mar 16 18:44:05 +0000 2019",
+          "user": {
+            "id": "92454615",
+            "name": "Computer Says No",
+            "followers_count": 249
+          }
+        }
+      ]
+    }
+  }
+}
+
+---
+
+(Connections)Conexiones en GraphQL = Relaciones de tablas en bd
+
+GraphiQL
+
+{
+  viewer {
+    id
+    name
+    repositories(last: 3) {
+      edges {
+        node {
+          id
+          name
+          description
+        }
+      }
+    }
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "viewer": {
+      "id": "MDQ6VXNlcjI0OTY1NzQ1",
+      "name": "Camilo Tapia",
+      "repositories": {
+        "edges": [
+          {
+            "node": {
+              "id": "MDEwOlJlcG9zaXRvcnkxNjk1OTgyMjM=",
+              "name": "test_react_js",
+              "description": "Repositorio de proyecto react.js"
+            }
+          },
+          {
+            "node": {
+              "id": "MDEwOlJlcG9zaXRvcnkxNzAyMDM1Njk=",
+              "name": "tic-tac-toe",
+              "description": "tic-tac-toe tutorial react.js"
+            }
+          },
+          {
+            "node": {
+              "id": "MDEwOlJlcG9zaXRvcnkxNzAzOTg0MDQ=",
+              "name": "tutonodejs",
+              "description": "Tutoriales node.js"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+---
+
+Algunas veces se necesitara una conexión para relacionar un objeto a otros objetos y otras veces ya viene 
+por relacionados los campos por ende más anidados.
+
+Multiples campos anidados
+
+{
+  twitter {
+    Javatweet: search(q: "Java", count:1) {
+      id
+      text
+      created_at
+      user {
+        name
+        followers_count
+        tweets_count
+        tweets(limit: 5) {
+          text
+          retweet_count
+        }
+      }
+    }
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "twitter": {
+      "Javatweet": [
+        {
+          "id": "1107047307869147100",
+          "text": "RT @relizarov: Turns out ripping off technical posts is a thing! My original: https://t.co/QEEQ9QhyYB Ripoff: https://t.co/lZkuifvGQ0 What…",
+          "created_at": "Sat Mar 16 22:33:40 +0000 2019",
+          "user": {
+            "name": "moussa",
+            "followers_count": 928,
+            "tweets_count": 5858,
+            "tweets": [
+              {
+                "text": "RT @relizarov: Turns out ripping off technical posts is a thing! My original: https://t.co/QEEQ9QhyYB Ripoff: https://t.co/lZkuifvGQ0 What…",
+                "retweet_count": 14
+              },
+              {
+                "text": "Quand on me dit faire quelque chose que j'avais déjà prévu de faire ?? https://t.co/JLmGQSDrcI",
+                "retweet_count": 0
+              },
+              {
+                "text": "RT @lyes1357: Bonjour Twitter je suis calligraphe je réalise des veilleuses personnalisés partager mon travail svp un RT peut m’aider sa pr…",
+                "retweet_count": 255
+              },
+              {
+                "text": "[DAKAR-ZIGUINCHOR] ce dimanche\nRéservation ??  https://t.co/GgXM7rQcZa https://t.co/2IQeEhG9fv",
+                "retweet_count": 0
+              },
+              {
+                "text": "Kick off new project at #Andando https://t.co/lPbhhRFLZa",
+                "retweet_count": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+
+---
+{
+  twitter {
+    ReactJSTweets: search(q: "ReactJS", count: 1) {
+      ...camposTweet
+    }
+    JavaTweets: search(q: "Java", count: 1) {
+      ...camposTweet
+    }
+    JavaScriptTweets: search(q: "JavaScript", count: 1) {
+      ...camposTweet
+    }
+  }
+}
+
+fragment camposTweet on Tweet {
+  id
+  text
+  user {
+    name
+    followers_count
+    tweets_count
+    tweets(limit: 1) {
+      text
+      retweet_count
+    }
+  }
+}
+
+---
+
+Result 
+
+{
+  "data": {
+    "twitter": {
+      "ReactJSTweets": [
+        {
+          "id": "1107049217279909900",
+          "text": "RT @james_k_nelson: The useQueryParams() hook by @pbesh is a neat little abstraction for storing state within URL parameters.\n\nIt works wit…",
+          "user": {
+            "name": "Sibelius Seraphini",
+            "followers_count": 2561,
+            "tweets_count": 18056,
+            "tweets": [
+              {
+                "text": "RT @james_k_nelson: The useQueryParams() hook by @pbesh is a neat little abstraction for storing state within URL parameters.\n\nIt works wit…",
+                "retweet_count": 5
+              }
+            ]
+          }
+        }
+      ],
+      "JavaTweets": [
+        {
+          "id": "1107049425082310700",
+          "text": "Who do you wished Sun Microsystems(Java) should have been bought by instead of Oracle at the time of sale?",
+          "user": {
+            "name": "Amit N",
+            "followers_count": 24,
+            "tweets_count": 15,
+            "tweets": [
+              {
+                "text": "Who do you wished Sun Microsystems(Java) should have been bought by instead of Oracle at the time of sale?",
+                "retweet_count": 0
+              }
+            ]
+          }
+        }
+      ],
+      "JavaScriptTweets": [
+        {
+          "id": "1107049308036186100",
+          "text": "Fellow #javascript devs: I just started to look into #purescript to find out that it seemingly relies on @bower . I… https://t.co/gpC8KNxekk",
+          "user": {
+            "name": "4nduril - Tobi Barth",
+            "followers_count": 234,
+            "tweets_count": 15450,
+            "tweets": [
+              {
+                "text": "Fellow #javascript devs: I just started to look into #purescript to find out that it seemingly relies on @bower . I… https://t.co/gpC8KNxekk",
+                "retweet_count": 0
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Paginando Resultados en GraphQL (offsets, limits)
+
+# offset salta 5 topStories y muestra las siguiente 5 por el limit
+{
+	hn{
+		topStories(limit:5, offset:5){
+			id
+			title
+			url
+		}
+	}
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "hn": {
+      "topStories": [
+        {
+          "id": "19408174",
+          "title": "Invent More, Toil Less (2016) [pdf]",
+          "url": "https://www.usenix.org/system/files/login/articles/login_fall16_08_beyer.pdf"
+        },
+        {
+          "id": "19407865",
+          "title": "Saving of public Google+ content by the Archive Team has begun",
+          "url": "https://www.reddit.com/r/plexodus/comments/az285j/saving_of_public_google_content_at_the_internet/"
+        },
+        {
+          "id": "19409907",
+          "title": "iPad Pro as Development Machine",
+          "url": "https://arslan.io/2019/01/07/using-the-ipad-pro-as-my-development-machine/"
+        },
+        {
+          "id": "19407548",
+          "title": "Lem: A Common Lisp editor/IDE with high expansibility",
+          "url": "https://github.com/cxxxr/lem"
+        },
+        {
+          "id": "19409046",
+          "title": "A lesson in shortcuts (2012)",
+          "url": "https://plus.google.com/101960720994009339267/posts/R58WgWwN9jp"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Queries con nombres
+
+query ConsultarHackNews{
+	hn{
+		topStories(limit:5, offset:5){
+			id
+			title
+			url
+		}
+	}
+}
+
+---
+# Notece el signo de exclamación, el cual identifica el argumento obligatorio
+
+query ConsultarTweetsGraphQL($tweet: String!) {
+	twitter {
+		search(q: $tweet) {
+			id
+			text
+		}
+	}
+}
+
+---
+
+query variables
+# Con formato json siempre con "" los string
+{
+	"tweet": "Java"
+}
+
+Result
+
+---
+
+{
+  "data": {
+    "twitter": {
+      "search": [
+        {
+          "id": "1107056101600739300",
+          "text": "RT @gp_pulipaka: Practical Python Libraries for Every Data Scientist. #BigData #Analytics #DataScience #AI #MachineLearning #IoT #IIoT #PyT…"
+        },
+        {
+          "id": "1107056092331204600",
+          "text": "java?!!??????!!?????!!"
+        },
+        {
+          "id": "1107056039667646500",
+          "text": "How can I let certain words be typed on my java keyboars https://t.co/YbTdkQ7J0N"
+        },
+        {
+          "id": "1107055985204609000",
+          "text": "hey @code \nI dont know whats going on.\nBut Code is saying I dont have Java JDK &amp; JRE installed when I do.\nLatest up… https://t.co/rRmcY0mdfa"
+        },
+        {
+          "id": "1107055942632235000",
+          "text": "???Progate?PHP?????Progate??????????\nPHP, Java, Ruby????????????????????PHP????????????????????????"
+        },
+        {
+          "id": "1107055899711934500",
+          "text": "Java???( ??? )\n\nGraal??? ? ??? (?????Java??????Go????) https://t.co/tZBOcTNpAy #Qiita"
+        },
+        {
+          "id": "1107055783018000400",
+          "text": "@Stryfe_the_pug Only accepting Java Edition ones. =p"
+        },
+        {
+          "id": "1107055743239241700",
+          "text": "RT @calotocen: ?????????\n\n??????\n\n?????Java????\n\n??momoTaro=momo.createMomoTaro();\nmomoTaro.grow();\nmomoTaro.moveTo(ONIGASHIMA);\nfor (Demon…"
+        },
+        {
+          "id": "1107055734775177200",
+          "text": "tama lang na naglustay ako ng 200 ngayong weekend para sa venti sized java chip achkkkkk https://t.co/fmcLQ8vRHX"
+        },
+        {
+          "id": "1107055709777096700",
+          "text": "RT @html600: ????????COBOL???????\n\n?????\nCOBOL??????????????????\nJava?PHP????\n\n????????????\n\n???????????\n\n???????????????\n\n????????????????…"
+        },
+        {
+          "id": "1107055692098080800",
+          "text": "java commons lang ???????\njava commons lang?????! #java #programming\nhttps://t.co/cfRW6jeSIe"
+        },
+        {
+          "id": "1107055640499806200",
+          "text": "RT @wiz4_werdna: ?????????????????2???????????????????????????????????????\n\n??20???????51?????????????????????????????????? https://t.co/1U…"
+        },
+        {
+          "id": "1107055635026178000",
+          "text": "JAVA???????(????3?????&?????????????)\n????:????~??~???\n??:~60?? / ???:???? / ??:45?????\n#?? #?????? #JAVA"
+        },
+        {
+          "id": "1107055610405761000",
+          "text": "RT @gp_pulipaka: Free eBook: Machine Learning Is Changing the Rules. #BigData #Analytics #DataScience #AI #MachineLearning #IoT #IIoT #PyTo…"
+        },
+        {
+          "id": "1107055525357862900",
+          "text": "Java Developers – 3 positions – 1 Architect &amp; 2 Senior – Washington Jobs https://t.co/8ewSGdfVIm"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Pasar múltiples variables a las consultas
+
+query ConsultarTweetsGraphQL($tweet: String!, $total: Int) {
+	twitter {
+		search(q: $tweet, count: $total) {
+			id
+			text
+		}
+	}
+}
+
+query variables
+
+{
+  "tweet": "ReactJS",
+  "total": 3
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "twitter": {
+      "search": [
+        {
+          "id": "1107058554224238600",
+          "text": "RT @gp_pulipaka: 2019 Update: The Best Machine Learning Books. #BigData #Analytics #DataScience #AI #MachineLearning #IoT #IIoT #PyTorch #P…"
+        },
+        {
+          "id": "1107058506484592600",
+          "text": "RT @react_pro: React JS Frontend Web Development for Beginners\n\n? https://t.co/xOSjwoDYhY\n\n#reactjs #javascript https://t.co/34QyQmFqqJ"
+        },
+        {
+          "id": "1107058497097814000",
+          "text": "RT @erikaybar_: My advice for learning @reactjs:\n0. JavaScript30 @wesbos (all 30)\n1. Commit to *completing* 3 projects out in the open\n2. S…"
+        }
+      ]
+    }
+  }
+}
+
+---
+
+Mutations, que son y como utilizarlos
+
+Para obtener los datos de una aplicación GraphQL hemos utilizado la palabra query(consulta).
+
+> Hemos visto anteriormente que la palabra query es opcional. Este es similar ha realizar un SELECT
+
+Si deseas editar o eliminar un registro, deberás utilizar un mutation.
+
+*.- Los datos se pasan como payload(Carga útil).
+
+*.- GraphQL hace los cambios.
+
+*.- La api es la que define que cambios se pueden realizar y que parámetros a tomar, igual que una base de datos
+o aplicación web.
+
+---
+
+mutation nuevoComentario ($input: SetValueForKeyInput!){
+  keyValue_setValue(input: $input){
+    clientMutationId
+    item{
+      id
+      value
+    }
+  }
+}
+
+query variables
+
+{
+"input": {
+    "id" : "123456789",
+    "value": "Este es un comentario nuevo",
+    "clientMutationId": "987654321"
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "keyValue_setValue": {
+      "clientMutationId": "987654321",
+      "item": {
+        "id": "123456789",
+        "value": "Este es un comentario nuevo"
+      }
+    }
+  }
+}
+
+---
+
+query leerComentario{
+  keyValue {
+    getValue(id: "123456789"){
+      id
+      value
+    }
+  }
+}
+---
+
+Result
+
+{
+  "data": {
+    "keyValue": {
+      "getValue": {
+        "id": "123456789",
+        "value": "Este es un comentario nuevo"
+      }
+    }
+  }
+}
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
