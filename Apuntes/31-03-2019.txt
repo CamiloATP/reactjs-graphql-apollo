@@ -119,9 +119,133 @@ Result
   }
 }
 
---
+---
 
+Como agregar campos anidados en el código
 
+schema
+
+    type Cliente{
+        id: ID
+        nombre: String
+        apellido: String
+        empresa: String
+        emails: [Email]
+        edad: Int
+        tipo: tipoCliente
+        pedidos: [Pedido]
+    }
+    type Pedido{
+        producto: String
+        precio: Int
+    }
+    type Email{
+        email: String
+    }
+    type Query {
+        getCliente(id: ID): Cliente
+    }
+    enum tipoCliente{
+        BASICO
+        ESTADAR
+        AVANZADO
+    }
+    input EmailInput{
+        email: String
+    }
+    input PedidoInput{
+        producto: String
+        precio: Int
+    }
+    input ClienteInput{
+        id: ID
+        nombre: String!
+        apellido: String!
+        empresa: String!
+        emails: [EmailInput]
+        edad: Int!
+        tipo: tipoCliente
+        pedidos: [PedidoInput]
+    }
+    type Mutation{
+        crearCliente(input: ClienteInput): Cliente
+    }  
+
+---
+ 
+
+mutation {
+	crearCliente(input: {
+		nombre: "Alquies"
+		apellido: "Bailo"
+		empresa: "salsa"
+		emails: [
+      			{
+        				email: "a.bailo@gmail.com"
+      			}
+      			{
+        				email: "aquiles.b@gmail.com"
+      			}
+    		]
+    		edad: 25
+    		tipo: BASICO
+    		pedidos: [
+    			{
+        				producto: "Curso GraphQL"
+        				precio: 10
+      			}
+    			{
+    				producto: "Computador DELL"
+        				precio: 200000
+  			}
+  		]
+	}){
+		id
+		nombre
+		apellido
+    		tipo
+    		emails{
+      			email
+    		}
+    		pedidos{
+      			producto
+      			precio
+   		 }
+	}
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "crearCliente": {
+      "id": "439892079f1f8fdcdc35",
+      "nombre": "Alquies",
+      "apellido": "Bailo",
+      "tipo": "BASICO",
+      "emails": [
+        {
+          "email": "a.bailo@gmail.com"
+        },
+        {
+          "email": "aquiles.b@gmail.com"
+        }
+      ],
+      "pedidos": [
+        {
+          "producto": "Curso GraphQL",
+          "precio": 10
+        },
+        {
+          "producto": "Computador DELL",
+          "precio": 200000
+        }
+      ]
+    }
+  }
+}
 
 
 
