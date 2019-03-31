@@ -7,6 +7,9 @@ import graphqlHTTP from 'express-graphql';
 // Se importa schema
 import schema from './schema';
 
+// Resolvers
+import resolvers from './resolvers';
+
 /////////////////////////////////////////////////////////////////////
 // Express es una infraestructura web de direccionamiento y        //
 // middleware que tiene una funcionalidad mínima propia: una       //
@@ -26,44 +29,6 @@ app.get('/', (req, res) => {
     res.send('Todo Listo');
 });
 
-// Se crear una clase cliente con un contructor con parametros
-class Cliente{
-    constructor(id, {nombre, apellido, empresa, email}){
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.empresa = empresa;
-        this.email = email;
-    }
-}
-
-// Emula un DB, la constante es igual a un objeto vacio.
-const clientesDB = {};
-
-
-// El Resolver
-const root = {
-    cliente: () => {
-        return {
-            "id": 12345678,
-            "nombre": "Aquiles",
-            "apellido": "Bailo",
-            "empresa": "DDR",
-            "email": "aquiles.bailo@gmail.com"
-        }
-    },
-    crearCliente: ({input}) => {
-        const id = require('crypto').randomBytes(10).toString('hex');
-        // array (id => input)
-        clientesDB[id] = input;
-        //////////////////////////////////////////////////////////////
-        // Se retorna una nueva instacia de cliente, el cual recibe //
-        // por parametro el id y el object input                    //
-        //////////////////////////////////////////////////////////////
-        return new Cliente(id, input);
-    }
-};
-
 ///////////////////////////////////////////////////////////////////////
 // Este ejemplo muestra una función de middleware sin ninguna vía de //
 // acceso de montaje. La función se ejecuta para cualquier tipo de   //
@@ -75,7 +40,7 @@ app.use('/graphql', graphqlHTTP({
         // Que schema va a utilizar
         schema,
         // El resolver se pasa como rootValue
-        rootValue: root,
+        rootValue: resolvers,
         // Utilizar Graphiql <--
         graphiql: true
     })

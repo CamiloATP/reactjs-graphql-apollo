@@ -38,7 +38,34 @@ Result
 }
 ---
 
+Más sobre los resolvers y obtener un registro por id
 
+Resolver son funciones que van a hacer las interaciones con el schema de GraphQL.
+
+{
+  getCliente(id: "4ed9209c52ef5f6f29d0"){
+    empresa
+    nombre
+    apellido
+  }
+}
+
+---
+Result
+
+{
+  "data": {
+    "getCliente": {
+      "empresa": "salsa",
+      "nombre": "Alquies",
+      "apellido": "Bailo"
+    }
+  }
+}
+---
+
+
+---
 
 
 
