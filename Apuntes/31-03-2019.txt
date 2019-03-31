@@ -78,6 +78,48 @@ de cualquier tipo, en el objeto especifico que se modifique su estructura.
 
 ---
 
+Tipos de dato Enum
+
+enum tipoCliente{
+        BASICO
+        ESTADAR
+        AVANZADO
+}
+
+---
+
+mutation {
+	crearCliente(input: {
+		nombre: "Alquies"
+		apellido: "Bailo"
+		empresa: "salsa"
+		email: "a.bailo@gmai.com"
+    		edad: 25
+    		tipo: BASICO
+	}){
+		id
+		nombre
+		apellido
+    tipo
+	}
+}
+
+--
+
+Result
+
+{
+  "data": {
+    "crearCliente": {
+      "id": "122154befc37ca5bb4cc",
+      "nombre": "Alquies",
+      "apellido": "Bailo",
+      "tipo": "BASICO"
+    }
+  }
+}
+
+--
 
 
 

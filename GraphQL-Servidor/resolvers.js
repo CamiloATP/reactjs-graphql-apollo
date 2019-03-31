@@ -1,12 +1,13 @@
 // Se crear una clase cliente con un contructor con parametros
 class Cliente{
-    constructor(id, {nombre, apellido, empresa, email, edad}){
+    constructor(id, {nombre, apellido, empresa, email, edad, tipo}){
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.empresa = empresa;
         this.email = email;
         this.edad = edad;
+        this.tipo = tipo
     } 
 }
 
