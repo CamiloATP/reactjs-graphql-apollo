@@ -21,6 +21,7 @@ const schema = buildSchema(`
     type Query {
         getCliente(id: ID): Cliente
     }
+    """ Asigna la categoría del Cliente """
     enum tipoCliente{
         BASICO
         ESTADAR
@@ -33,6 +34,7 @@ const schema = buildSchema(`
         producto: String
         precio: Int
     }
+    """ Campos para los Clientes Nuevos """
     input ClienteInput{
         id: ID
         nombre: String!
@@ -43,7 +45,10 @@ const schema = buildSchema(`
         tipo: tipoCliente
         pedidos: [PedidoInput]
     }
+    """ Mutations para crear nuevos Clientes """
     type Mutation{
+        #  Nombre del resolver, input con datos y valor que retorna.
+        """ Te permite crear Nuevos Clientes """
         crearCliente(input: ClienteInput): Cliente
     }    
 `);

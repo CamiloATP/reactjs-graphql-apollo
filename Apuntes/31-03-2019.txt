@@ -247,7 +247,17 @@ Result
   }
 }
 
+---
 
+Comentarios en GraphQL
+
+Existen dos tipos:
+
+1.- Te permite agregar una descripción en GraphiQL """ Comentario de descripción """
+2.- Te permite comentar el código que va hacer ignorado por GraphQL 
+no se ejecuta # Comentario
+
+---
 
 
 
