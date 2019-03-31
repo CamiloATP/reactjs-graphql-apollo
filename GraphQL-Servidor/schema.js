@@ -7,6 +7,7 @@ const schema = buildSchema(`
         apellido: String
         empresa: String
         email: String
+        edad: Int
     }
     type Query {
         getCliente(id: ID): Cliente
@@ -17,6 +18,7 @@ const schema = buildSchema(`
         apellido: String!
         empresa: String!
         email: String!
+        edad: Int!
     }
     type Mutation{
         crearCliente(input: ClienteInput): Cliente

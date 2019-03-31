@@ -64,6 +64,17 @@ Result
 }
 ---
 
+Tipos de datos en GraphQL
+
+INT = Número enteros
+FLOAT = Número con decimales
+STRING = cadena de texto
+ID = número único
+BOOLEAN = true o false
+---
+
+En el type del objeto, el input y en el resolver al agregar un nuevo dato 
+de cualquier tipo, en el objeto especifico que se modifique su estructura.
 
 ---
 
