@@ -1,0 +1,55 @@
+
+Creando mutation e input para nuevos clientes
+---
+
+Si tienes una api debe tener un endpoint donde el usuario pueda crear un registro.
+
+---
+
+El mutation es la forma de cambiar o crear nuevos datos.
+
+---
+
+mutation {
+	crearCliente(input: {
+		nombre: "Alquies"
+		apellido: "Canto"
+		empresa: "salsa"
+		email: "a.bailo@gmai.com"
+	}){
+		id
+		nombre
+		apellido
+	}
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "crearCliente": {
+      "id": "87a04936b9c39378df60",
+      "nombre": "Alquies",
+      "apellido": "Canto"
+    }
+  }
+}
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
