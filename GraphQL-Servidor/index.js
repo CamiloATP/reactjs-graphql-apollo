@@ -5,10 +5,7 @@ import express from 'express';
 import graphqlHTTP from 'express-graphql';
 
 // Se importa schema
-import schema from './schema';
-
-// Resolvers
-import resolvers from './resolvers';
+import { schema } from './data/schema';
 
 /////////////////////////////////////////////////////////////////////
 // Express es una infraestructura web de direccionamiento y        //
@@ -39,8 +36,6 @@ app.get('/', (req, res) => {
 app.use('/graphql', graphqlHTTP({
         // Que schema va a utilizar
         schema,
-        // El resolver se pasa como rootValue
-        rootValue: resolvers,
         // Utilizar Graphiql <--
         graphiql: true
     })

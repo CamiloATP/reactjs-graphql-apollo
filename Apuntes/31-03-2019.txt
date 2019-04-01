@@ -259,6 +259,19 @@ no se ejecuta # Comentario
 
 ---
 
+Creando un Schema.graphql
+
+- Servidor GraphQL con MongoDB
+
+/* Librerias con la cual se estructurará el código */
+> npm install --save graphql-tools graphql-import
+
+---
+
+
+
+
+
 
 
 
