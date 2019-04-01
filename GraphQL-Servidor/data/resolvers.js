@@ -1,3 +1,6 @@
+import mongoose from 'mongoose';
+import { Cliente } from './db';
+
 // Se crear una clase cliente con un contructor con parametros
 class Cliente{
     constructor(id, {nombre, apellido, empresa, emails, edad, tipo, pedidos}){
@@ -12,9 +15,6 @@ class Cliente{
     } 
 }
 
-// Emula un DB, la constante es igual a un objeto vacio.
-const clientesDB = {};
-
 export const resolvers = {
     // Sintaxis de graphql-tools
     Query: {
@@ -23,7 +23,7 @@ export const resolvers = {
         }
     },
     Mutation: {
-        crearCliente: ({input}) => {
+        crearCliente: (root, {input}) => {
             const id = require('crypto').randomBytes(10).toString('hex');
             // array (id => input)
             clientesDB[id] = input;
