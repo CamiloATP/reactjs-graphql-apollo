@@ -73,3 +73,21 @@ mutation {
 }
 
 ---
+
+{
+  getClientes(limit: 2){
+    id
+    nombre
+  }
+}
+
+---
+
+{
+  getCliente(id: "5caa59ae61c6f3082086cf5f"){
+    id
+    nombre
+  }
+}
+
+---

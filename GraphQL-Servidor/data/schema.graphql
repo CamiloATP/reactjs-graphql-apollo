@@ -19,7 +19,7 @@ type Email{
 }
 
 type Query {
-    getClientes: [Cliente]
+    getClientes(limit: Int): [Cliente]
     getCliente(id: ID): Cliente
 }
 
