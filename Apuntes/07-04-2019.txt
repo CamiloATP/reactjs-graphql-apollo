@@ -63,3 +63,13 @@ mutation {
 }
 
 ---
+
+{
+  getClientes {
+    id
+    nombre
+    empresa
+  }
+}
+
+---

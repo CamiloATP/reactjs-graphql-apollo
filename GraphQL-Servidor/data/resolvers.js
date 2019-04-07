@@ -5,8 +5,11 @@ import { rejects } from 'assert';
 export const resolvers = {
     // Sintaxis de graphql-tools.
     Query: {
+        getClientes: () => {
+            return Cliente.find({});
+        },
         getCliente: ({id}) => {
-            return new Cliente(id, clientesDB[id]);
+            return Cliente.find({id});
         }
     },
     Mutation: {
