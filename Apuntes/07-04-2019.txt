@@ -197,3 +197,86 @@ Result
 }
 
 ---
+
+Apollo Client y Server
+
+Apollo es una plataforma que te permitirá realizar consultas a tus datos de GraphQL.
+
+Entre ellos los query, los mutations.
+
+Con Apollo te será muy sencillo conectar tus aplicaciones React con GraphQL.
+
+También disponible para angular, javascript y react native.
+
+---
+
+API para realizar queries y mutations.
+
+Cachear las consultas y datos.(Si tienes muchos datos y tienes muchas consultas 
+por default va a cachar los datos y eso hace que tu aplicación sea un poco más rápido).
+
+Es necesario configurar un cliente y un servidor (apollo client y apollo server).
+
+Similar a redux
+
+Existen otras opciones como Relay o GraphQL-Yoga
+
+---
+
+Configurando APollo server
+
+> cd servidor
+/* apollo-server */
+> npm install --save apollo-server-express
+
+Afuera de la carpeta servidor
+/* React  -g = global*/
+> npm install -g create-react-app
+
+/* Crear aplicación */
+> create-react-app /*nombre de la aplicación*/
+
+cd cliente
+/* Apollo Plugins */
+> npm install --save apollo-boost react-apollo graphql graphql-tag
+
+//// npm start ////
+
+> cd cliente
+> npm start 
+---
+
+> servidor
+> npm start
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
