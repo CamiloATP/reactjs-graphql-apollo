@@ -1,22 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose, { Promise } from 'mongoose';
 import { Cliente } from './db';
-
-// Se crear una clase cliente con un contructor con parametros
-class Cliente{
-    constructor(id, {nombre, apellido, empresa, emails, edad, tipo, pedidos}){
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.empresa = empresa;
-        this.emails = emails;
-        this.edad = edad;
-        this.tipo = tipo;
-        this.pedidos = pedidos;
-    } 
-}
+import { rejects } from 'assert';
 
 export const resolvers = {
-    // Sintaxis de graphql-tools
+    // Sintaxis de graphql-tools.
     Query: {
         getCliente: ({id}) => {
             return new Cliente(id, clientesDB[id]);
@@ -24,14 +11,28 @@ export const resolvers = {
     },
     Mutation: {
         crearCliente: (root, {input}) => {
-            const id = require('crypto').randomBytes(10).toString('hex');
-            // array (id => input)
-            clientesDB[id] = input;
-            //////////////////////////////////////////////////////////////
-            // Se retorna una nueva instacia de cliente, el cual recibe //
-            // por parametro el id y el object input                    //
-            //////////////////////////////////////////////////////////////
-            return new Cliente(id, input);
+            // Se crear una nueva instacia del objeto Cliente.
+            const nuevoCliente = new Cliente({
+                nombre : input.nombre,
+                apellido : input.apellido,
+                empresa : input.empresa,
+                emails : input.emails,
+                edad : input.edad,
+                tipo : input.tipo,
+                pedidos : input.pedidos
+            });
+            // Mongo agrega automaticamente el id con _id
+            nuevoCliente.id = nuevoCliente._id;
+            
+            // Los promise tratan de ejecutar un código.
+            return new Promise((resolve, object) => {
+                // Se registra el nuevo cliente
+                nuevoCliente.save((error) => {
+                    // Para verificar si se inserto el registro.
+                    if(error) rejects(error);
+                    else resolve(nuevoCliente);
+                });
+            });
         }
     }
 }

@@ -1,0 +1,1 @@
+Se instala gestor de base de datos NoSQL Robo 3T.

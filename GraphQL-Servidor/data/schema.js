@@ -5,7 +5,7 @@ import { resolvers } from './resolvers';
    Permite importar el archivo schema.graphql */
 import { importSchema } from 'graphql-import';
 
-// Se importa el método makeExecutableSchme de graphql-tools
+// Se importa el método makeExecutableSchema de graphql-tools
 import { makeExecutableSchema } from 'graphql-tools';
 
 const typeDefs = importSchema('data/schema.graphql');
