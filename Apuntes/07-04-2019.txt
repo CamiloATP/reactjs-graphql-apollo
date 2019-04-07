@@ -91,3 +91,109 @@ mutation {
 }
 
 ---
+
+Alias
+
+query {
+  uno: getCliente(id: "5caa59ae61c6f3082086cf5f"){
+    id
+    nombre
+  }
+  
+  dos:getCliente(id: "5caa59a961c6f3082086cf57"){
+    id
+    nombre
+  }
+}
+
+
+---
+
+Result
+
+{
+  "data": {
+    "uno": {
+      "id": "5caa59ae61c6f3082086cf5f",
+      "nombre": "Alquies"
+    },
+    "dos": {
+      "id": "5caa59a961c6f3082086cf57",
+      "nombre": "Alquies"
+    }
+  }
+}
+
+---
+
+Fragment
+
+query {
+  uno: getCliente(id: "5caa59ae61c6f3082086cf5f"){
+    ...clienteFragment
+    emails{
+      email
+    }
+  }
+  
+  dos:getCliente(id: "5caa59a961c6f3082086cf57"){
+    ...clienteFragment
+  }
+}
+
+fragment clienteFragment on Cliente {
+  id
+  nombre
+  apellido
+  edad
+  pedidos{
+    producto
+  }
+}
+
+---
+
+Result
+
+{
+  "data": {
+    "uno": {
+      "id": "5caa59ae61c6f3082086cf5f",
+      "nombre": "Alquies",
+      "apellido": "Bailo",
+      "edad": 25,
+      "pedidos": [
+        {
+          "producto": "Curso GraphQL"
+        },
+        {
+          "producto": "Computador DELL"
+        }
+      ],
+      "emails": [
+        {
+          "email": "a.bailo@gmail.com"
+        },
+        {
+          "email": "aquiles.b@gmail.com"
+        }
+      ]
+    },
+    "dos": {
+      "id": "5caa59a961c6f3082086cf57",
+      "nombre": "Alquies",
+      "apellido": "Bailo",
+      "edad": 25,
+      "pedidos": [
+        {
+          "producto": "Curso GraphQL"
+        },
+        {
+          "producto": "Computador DELL"
+        }
+      ]
+    }
+  }
+}
+
+---
