@@ -36,11 +36,19 @@ export const resolvers = {
         },
         actualizarCliente: (root, {input}) => {
             return new Promise((resolve, object) => {
-                // Encuentra por id el registro y actualiza. {new: true} si no existe crea el registro.
-                Cliente.findOneAndUpdate( { _id : input.id }, input, {new: true}, (error, cliente)  => {
+                // Encuentra por id del registro y actualiza. {new: true} si no existe crea el registro.
+                Cliente.findOneAndUpdate( { _id : input.id }, input, {new: false}, (error, cliente)  => {
                     // Para verificar si se actualizo el registro
                     if(error) rejects(error);
                     else resolve(cliente);
+                });
+            });
+        },
+        eliminarCliente: (root, {id}) => {
+            return new Promise((resolve, object) => {
+                Cliente.findOneAndRemove({ _id : id }, (error) => {
+                    if(error) rejects(error);
+                    else resolve("El registro " + id + " fue eliminado con éxito");
                 });
             });
         }

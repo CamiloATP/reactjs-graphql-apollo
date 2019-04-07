@@ -57,3 +57,9 @@ mutation {
 }
 
 ---
+
+mutation {
+  eliminarCliente(id: "5caa3c4d2f38001fd4bf93fe")
+}
+
+---
