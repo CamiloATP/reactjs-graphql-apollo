@@ -1,1 +1,59 @@
 Se instala gestor de base de datos NoSQL Robo 3T.
+
+---
+
+mutation {
+  actualizarCliente(input: {
+    id: "5caa3c4d2f38001fd4bf93fe", 
+    nombre: "Alquies", 
+    apellido: "Bailo y Canto", 
+    empresa: "La misma", 
+    edad: 25})
+  {
+    id
+  }
+}
+
+---
+
+mutation {
+  crearCliente(input: {
+         nombre: "Alquies"
+         apellido: "Bailo"
+         empresa: "salsa"
+         emails: [
+        {
+         email: "a.bailo@gmail.com"
+        }
+       {
+         email: "aquiles.b@gmail.com"
+       }
+     ]
+    edad: 25
+    tipo: BASICO
+    pedidos: [
+     {
+        producto: "Curso GraphQL"
+        precio: 10
+      }
+     {
+      producto: "Computador DELL"
+        precio: 200000
+     }
+    ]
+}){
+    id
+    nombre
+    apellido
+    tipo
+    emails{
+      email
+    }
+    pedidos{
+      producto
+      precio
+    }
+}
+}
+
+---

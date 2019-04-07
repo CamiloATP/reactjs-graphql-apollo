@@ -33,6 +33,16 @@ export const resolvers = {
                     else resolve(nuevoCliente);
                 });
             });
+        },
+        actualizarCliente: (root, {input}) => {
+            return new Promise((resolve, object) => {
+                // Encuentra por id el registro y actualiza. {new: true} si no existe crea el registro.
+                Cliente.findOneAndUpdate( { _id : input.id }, input, {new: true}, (error, cliente)  => {
+                    // Para verificar si se actualizo el registro
+                    if(error) rejects(error);
+                    else resolve(cliente);
+                });
+            });
         }
     }
 }
