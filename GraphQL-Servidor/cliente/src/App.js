@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-/* Se importa ApolloProvider: es el que rodea 
-   todo la aplicación React para decir que vamos a utilizar Apollo*/
+/* Se importa ApolloProvider: Es el que rodea 
+   todo la aplicación React para decir que vamos a utilizar Apollo */
 import { ApolloProvider } from 'react-apollo';
 
-/* Se importa ApolloCliente: es la Configuración para Apollo  */
+/* Se importa ApolloClient: Es la Configuración para Apollo  */
 import ApolloClient from 'apollo-boost';
 
 /* Componentes */

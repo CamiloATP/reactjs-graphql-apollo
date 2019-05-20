@@ -1,4 +1,4 @@
-// Se importa express
+// Se importa express <-- Estilo Typescript
 import express from 'express';
 
 // Se importa Apollo Server para Express
@@ -11,7 +11,7 @@ import { typeDefs } from './data/schema';
 import { resolvers } from './data/resolvers';
 
 /////////////////////////////////////////////////////////////////////
-// Express es una infraestructura web de direccionamiento y        //
+// Express es una infraestructura Web de direccionamiento y        //
 // middleware que tiene una funcionalidad mínima propia: una       //
 // aplicación Express es fundamentalmente una serie de llamadas a  //
 // funciones de middleware.                                        //
