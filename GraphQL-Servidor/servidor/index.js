@@ -1,4 +1,4 @@
-// Se importa express <-- Estilo Typescript
+// Se importa express | <-- Estilo Typescript
 import express from 'express';
 
 // Se importa Apollo Server para Express
