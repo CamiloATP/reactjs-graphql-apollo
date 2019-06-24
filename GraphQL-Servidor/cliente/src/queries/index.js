@@ -9,5 +9,5 @@ export const CLIENTES_QUERY = gql`{
         emails{
             email
         }
-	}
+    }
 }`;
