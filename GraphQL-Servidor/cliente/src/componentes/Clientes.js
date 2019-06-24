@@ -12,8 +12,8 @@ const Contactos = () => (
 
             return (
                 <Fragment>
-                    <h2 className="text-center">Lista de clientes</h2>
-                    <ul className="list-group">
+                    <h2 className="text-center mt-5">Lista de clientes</h2>
+                    <ul className="list-group mt-5">
                         {
                             data.getClientes.map(item => (
                                 <li key={item.id} className="list-group-item">
