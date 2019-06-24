@@ -246,37 +246,7 @@ cd cliente
 > npm start 
 ---
 
-> servidor
+> cd  servidor
 > npm start
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

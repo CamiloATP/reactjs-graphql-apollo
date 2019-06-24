@@ -285,15 +285,3 @@ Instalado mongoose- ORM de mongoDB para server de node.js
 > npm install --save mongoose 
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-

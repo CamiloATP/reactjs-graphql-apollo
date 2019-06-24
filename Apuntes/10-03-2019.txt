@@ -58,7 +58,7 @@ Mutation se utiliza para las otras 3 acciones de crud:
 
 Similares a un put / patch, delete o post de una rest API o un delete, update e insert de SQL.
 
-Igual que el query son independientes del lenguaje, así que son iguales si tu backend es node, php o
+Igual que el query, son independientes del lenguaje, así que son iguales si tu backend es node, php o
 python o si tu base de datos es SQL o noSQL.
 
 
@@ -154,67 +154,3 @@ type Cliente {
 }
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

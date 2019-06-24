@@ -44,26 +44,5 @@ Creando un servidor de GraphQL
 /* Instalar express-graphql y graphql */
 npm install --save express-graphql graphql
 
-Es utiliza template literal -> ` `
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Se utiliza template literal -> ` `
+---

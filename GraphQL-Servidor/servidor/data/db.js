@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-// Conexión
+// If we want to use mongoose in different position inside the codes
 mongoose.Promise = global.Promise;
 
 // Si se usa una db se debe colocar la ruta del archivo, el nombre de db esta en la ruta
