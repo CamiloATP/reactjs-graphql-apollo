@@ -8,7 +8,7 @@ const Contactos = () => (
             if(loading) return "Cargando...";
             if(error) return `Error: ${error.message}`;
 
-            console.log(data);
+            console.table(data.getClientes);
 
             return (
                 <Fragment>
