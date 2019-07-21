@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 /* 
 	Se importa ApolloProvider: Es el que rodea todo la aplicación 
@@ -10,10 +10,13 @@ import { ApolloProvider } from 'react-apollo';
 	desde la conexión proyecto ./servidor */
 import ApolloClient from 'apollo-boost';
 
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; 
+
 /* Componentes Header(Menu) del html */
 import Header from './componentes/Header';
-
 import Clientes from './componentes/Clientes';
+import NuevoCliente from './componentes/NuevoCliente';
+import EditarCliente from './componentes/EditarCliente';
 
 // Se crea una nueva instacia
 const client = new ApolloClient({
@@ -35,10 +38,18 @@ class App extends Component {
 				de donde se obtienen los datos de GraphQL */
 			<ApolloProvider client={client}>
 				{/* Apollo Provider rodea todos los componentes de la aplicación */}
-				<Header/>
-				<div className="container">
-					<Clientes/>
-				</div>
+				<Router>
+					<Fragment>
+						<Header/>
+						<div className="container">
+							<Switch>
+								<Route exact path="/" component={Clientes} />
+								<Route exact path="/cliente/nuevo" component={NuevoCliente} />
+								<Route exact path="/cliente/editar/:id" component={EditarCliente} />
+							</Switch>
+						</div>
+					</Fragment>	
+				</Router>	
 			</ApolloProvider>
 		);
 	}
