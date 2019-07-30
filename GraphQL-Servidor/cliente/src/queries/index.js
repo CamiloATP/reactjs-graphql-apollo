@@ -6,8 +6,5 @@ export const CLIENTES_QUERY = gql`{
         nombre
         apellido
         empresa
-        emails{
-            email
-        }
     }
 }`;
