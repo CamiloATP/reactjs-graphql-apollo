@@ -12,7 +12,39 @@ class NuevoCliente extends Component {
             email: '',
             tipo: ''
         },
-        error: false
+        error: false,
+        emails: []
+    }
+
+    nuevoCampo = () => {
+        this.setState({
+            emails: this.state.emails.concat([{email: ''}])
+        });
+    }
+
+    leerCampo = (i) => (e) => {
+        const nuevoEmail =  this.state.emails.map((email, index) => {
+            if(i !== index) return email;
+
+            return {
+                // Toma el state, y agrega lo que el usuario escriba
+                ...email,
+                email: e.target.value
+            }
+        });
+
+        this.setState({
+            emails: nuevoEmail
+        });
+
+        console.log(`Index: ${i} Valor: ${e.target.value}`);
+    }
+
+    quitarCampo = (i) => () => {
+        // Returna todos los elementos que no esan igual al index {i} que se le pasa por parametro
+        this.setState({
+            emails:  this.state.emails.filter((email, index) => i !== index)
+        });
     }
 
     render() { 
@@ -121,22 +153,35 @@ class NuevoCliente extends Component {
                                             }
                                         />
                                     </div>
-                                    <div className="form-group col-md-6">
-                                        <label>Email</label>
-                                        <input 
-                                            type="email" 
-                                            className="form-control" 
-                                            placeholder="Email"
-                                            onChange= { e => {
-                                                    this.setState({
-                                                        cliente: {
-                                                            ...this.state.cliente,
-                                                            email: e.target.value
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                        />
+                                    {
+                                        this.state.emails.map((input, index) => (
+                                            <div key={index} className="form-group col-md-12">
+                                                <label>Correo {index +1}</label>
+                                                <div className="input-group">
+                                                    <input
+                                                        onChange={this.leerCampo(index)} 
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        className="form-control"
+                                                    />
+                                                    <div className="input-group-append">
+                                                        {/* El index del map de emails */}
+                                                        <button
+                                                            onClick={this.quitarCampo(index)}
+                                                            type="button"
+                                                            className="btn btn-danger"
+                                                        >&times; Eliminar</button>
+                                                    </div>    
+                                                </div>
+                                            </div>    
+                                        ))
+                                    }
+                                    <div className="form-group d-flex justify-content-center col-md-12">
+                                        <button 
+                                            onClick={this.nuevoCampo}
+                                            type="button"
+                                            className="btn btn-warning"
+                                        >+ Agregar Email</button>
                                     </div>
                                 </div>
                                 <div className="form-row">
