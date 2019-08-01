@@ -67,7 +67,9 @@ class NuevoCliente extends Component {
                                 onSubmit={ e => {
                                         e.preventDefault();
 
-                                        const {nombre, apellido, empresa, edad, email, tipo} = this.state.cliente;
+                                        const {nombre, apellido, empresa, edad, tipo} = this.state.cliente;
+
+                                        const {emails} = this.state;
 
                                         if (nombre === '' ||
                                             apellido === '' ||
@@ -87,7 +89,7 @@ class NuevoCliente extends Component {
                                             apellido,
                                             empresa,
                                             edad: Number(edad),
-                                            email,
+                                            emails,
                                             tipo
                                         }
 
@@ -136,7 +138,7 @@ class NuevoCliente extends Component {
                                     </div>
                                 </div>
                                 <div className="form-row">
-                                    <div className="form-group col-md-6">
+                                    <div className="form-group col-md-12">
                                         <label>Empresa*</label>
                                         <input 
                                             type="text" 
