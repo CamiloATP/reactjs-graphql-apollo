@@ -12,18 +12,20 @@ class EditarCliente extends Component {
             <Fragment>  
                 <h2 className="text-center">Editar Cliente</h2>
 
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <Query query={CLIENTE_QUERY} variables={{id}}>
-                        {({ loading, error, data }) => {
+                        {({ loading, error, data, refetch }) => {
                             if(loading) return 'Cargando...';
                             if(error) return `Error! ${error.message}`;
 
-                            console.table(data);
+                            // console.table(data);
 
                             return (
 
                                 <FormularioEditarCliente 
                                     cliente={data.getCliente}
+                                    id={id}
+                                    refetch={refetch}
                                 />
                             );
                         }}
