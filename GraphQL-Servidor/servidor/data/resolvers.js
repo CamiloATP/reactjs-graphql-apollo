@@ -5,14 +5,22 @@ import { rejects } from 'assert';
 export const resolvers = {
     // Sintaxis de graphql-tools.
     Query: {
-        getClientes: (root, {limit}) => {
-            return Cliente.find({}).limit(limit);
+        getClientes: (root, {limit, offset}) => {
+            return Cliente.find({}).limit(limit).skip(offset);
         },
         getCliente: (root, {id}) => {
             return new Promise((resolve, object) => {
                 Cliente.findById(id, (error, cliente) => {
                     if(error) rejects(error);
                     else resolve(cliente);
+                });
+            });
+        },
+        totalClientes : (root) => {
+            return new Promise((resolve, object) => {
+                Cliente.countDocuments({}, (error, count) => {
+                    if(error) rejects(error);
+                    else resolve(count);
                 });
             });
         }
