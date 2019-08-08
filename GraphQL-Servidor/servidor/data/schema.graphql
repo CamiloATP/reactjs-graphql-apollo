@@ -18,10 +18,19 @@ type Email{
     email: String
 }
 
+type Producto{
+    id: ID
+    nombre: String
+    precio: Int
+    stock: Int
+}
+
 type Query {
     getClientes(limit: Int, offset: Int): [Cliente]
     getCliente(id: ID): Cliente
     totalClientes: String
+    getProductos(limit: Int, offset: Int): [Producto]
+    getProducto(id: ID): Producto
 }
 
 """ Asigna la categoría del Cliente """
@@ -52,6 +61,13 @@ input ClienteInput{
     pedidos: [PedidoInput]
 }
 
+input ProductoInput {
+    id: ID
+    nombre: String!
+    precio: Int!
+    stock: Int!
+}
+
 """ Mutations para crear nuevos Clientes """
 type Mutation{
     #  Nombre del resolver, input con datos y valor que retorna.
@@ -59,4 +75,6 @@ type Mutation{
     crearCliente(input: ClienteInput): Cliente
     actualizarCliente(input: ClienteInput): Cliente
     eliminarCliente(id: ID!): String
+    # Productos
+    nuevoProducto(input: ProductoInput): Producto
 }

@@ -1,5 +1,5 @@
 import mongoose, { Promise } from 'mongoose';
-import { Cliente } from './db';
+import { Cliente, Producto } from './db';
 import { rejects } from 'assert';
 
 export const resolvers = {
@@ -23,19 +23,30 @@ export const resolvers = {
                     else resolve(count);
                 });
             });
+        },
+        getProductos: (root, {limit, offset}) => {
+            return Producto.find({}).limit(limit).skip(offset);
+        },
+        getProducto: (root, {id}) => {
+            return new Promise((resolve, object) => {
+                Producto.findById(id, (error, producto) => {
+                    if(error) rejects(error);
+                    else resolve(producto);
+                });
+            });
         }
     },
     Mutation: {
         crearCliente: (root, {input}) => {
             // Se crear una nueva instacia del objeto Cliente.
             const nuevoCliente = new Cliente({
-                nombre : input.nombre,
-                apellido : input.apellido,
-                empresa : input.empresa,
-                emails : input.emails,
-                edad : input.edad,
-                tipo : input.tipo,
-                pedidos : input.pedidos
+                nombre: input.nombre,
+                apellido: input.apellido,
+                empresa: input.empresa,
+                emails: input.emails,
+                edad: input.edad,
+                tipo: input.tipo,
+                pedidos: input.pedidos
             });
             // Mongo agrega automaticamente el id con _id
             nuevoCliente.id = nuevoCliente._id;
@@ -67,7 +78,27 @@ export const resolvers = {
                     else resolve("El registro " + id + " fue eliminado con éxito");
                 });
             });
-        }
+        },
+        nuevoProducto: (root, {input}) => {
+            // Se crear una nueva instacia del objeto Producto.
+            const newProducto = new Producto({
+                nombre: input.nombre,
+                precio: input.precio,
+                stock: input.stock
+            });
+            // Mongo agrega automaticamente el id con _id
+            newProducto.id = newProducto._id;
+            
+            // Los promise tratan de ejecutar un código.
+            return new Promise((resolve, object) => {
+                // Se registra el nuevo producto
+                newProducto.save((error) => {
+                    // Para verificar si se inserto el registro.
+                    if(error) rejects(error);
+                    else resolve(newProducto);
+                });
+            });
+        },
     }
 }
 
