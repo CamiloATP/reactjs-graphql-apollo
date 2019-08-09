@@ -1,6 +1,7 @@
 import mongoose, { Promise } from 'mongoose';
 import { Cliente, Producto } from './db';
 import { rejects } from 'assert';
+import { resolve } from 'url';
 
 export const resolvers = {
     // Sintaxis de graphql-tools.
@@ -73,7 +74,7 @@ export const resolvers = {
         },
         eliminarCliente: (root, {id}) => {
             return new Promise((resolve, object) => {
-                Cliente.findOneAndRemove({ _id : id }, (error) => {
+                Cliente.findOneAndDelete({ _id : id }, (error) => {
                     if(error) rejects(error);
                     else resolve("El registro " + id + " fue eliminado con éxito");
                 });
@@ -99,6 +100,23 @@ export const resolvers = {
                 });
             });
         },
+        actualizarProducto: (root, {input}) => {
+            return new Promise((resolve, producto) => {
+                // Encuentra por id del registro y actualiza. {new: true} = Sino existe crea el registro
+                Producto.findOneAndUpdate( { _id: input.id }, input, {new: false}, (error, producto) => {
+                    if(error) rejects(error);
+                    else resolve(producto);
+                });
+            });
+        },
+        eliminarProducto: (root, {id}) => {
+            return new Promise((resolve, object) => {
+                Producto.findOneAndDelete({_id: id}, (error) => {
+                    if(error) rejects(error);
+                    else resolve("El registro " + id + " fue eliminado con éxito");
+                });
+            });
+        } 
     }
 }
 
