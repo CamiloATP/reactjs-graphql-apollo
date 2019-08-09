@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { Query, Mutation } from 'react-apollo';
-import { CLIENTES_QUERY } from '../queries';
-import { ELIMINAR_CLIENTE } from '../mutations';
+import { CLIENTES_QUERY } from '../../queries';
+import { ELIMINAR_CLIENTE } from '../../mutations';
 import { Link } from 'react-router-dom';
-import Paginador from './Paginador';
+import Paginador from '../Paginador';
 
 class Clientes extends Component {
 
@@ -36,7 +36,7 @@ class Clientes extends Component {
   
     render() {
         return(
-            <Query query={CLIENTES_QUERY} pollInterval={1000} variables={{limite: this.limite, offset: this.state.paginador.offset}}>
+            <Query query={CLIENTES_QUERY} pollInterval={500} variables={{limite: this.limite, offset: this.state.paginador.offset}}>
                 {({ loading, error, data, startPolling, stopPolling }) => {
                     if(loading) return "Cargando...";
                     if(error) return `Error: ${error.message}`;
