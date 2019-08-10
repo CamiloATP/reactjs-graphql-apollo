@@ -19,6 +19,7 @@ import NuevoCliente from './componentes/Clientes/NuevoCliente';
 import EditarCliente from './componentes/Clientes/EditarCliente';
 
 import NuevoProducto from './componentes/Productos/NuevoProducto';
+import Productos from './componentes/Productos/Productos'
 
 // Se crea una nueva instacia
 const client = new ApolloClient({
@@ -52,6 +53,7 @@ class App extends Component {
 								<Route exact path="/cliente/nuevo" component={NuevoCliente} />
 								<Route exact path="/cliente/editar/:id" component={EditarCliente} />
 								<Route exact path="/productos/nuevo" component={NuevoProducto} />
+								<Route exact path="/productos" component={Productos} />
 							</Switch>
 						</div>
 					</Fragment>	
