@@ -42,3 +42,9 @@ export const NUEVO_PRODUCTO = gql`
         }
     }
 `;
+
+export const ELIMINAR_PRODUCTO = gql`
+    mutation eliminarProducto($id: ID!){
+        eliminarProducto(id: $id)
+    }
+`;
