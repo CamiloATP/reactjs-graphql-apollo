@@ -35,7 +35,15 @@ export const resolvers = {
                     else resolve(producto);
                 });
             });
-        }
+        },
+        totalProductos : (root) => {
+            return new Promise((resolve, object) => {
+                Producto.countDocuments({}, (error, count) => {
+                    if(error) rejects(error);
+                    else resolve(count);
+                });
+            });
+        },
     },
     Mutation: {
         crearCliente: (root, {input}) => {
@@ -103,7 +111,8 @@ export const resolvers = {
         actualizarProducto: (root, {input}) => {
             return new Promise((resolve, producto) => {
                 // Encuentra por id del registro y actualiza. {new: true} = Sino existe crea el registro
-                Producto.findOneAndUpdate( { _id: input.id }, input, {new: false}, (error, producto) => {
+                // Para actualizar bien el state new puede ser true.
+                Producto.findOneAndUpdate( { _id: input.id }, input, {new: true}, (error, producto) => {
                     if(error) rejects(error);
                     else resolve(producto);
                 });

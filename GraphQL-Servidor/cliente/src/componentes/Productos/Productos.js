@@ -4,14 +4,40 @@ import { Query, Mutation } from 'react-apollo';
 import { PRODUCTOS_QUERY } from '../../queries';
 import {ELIMINAR_PRODUCTO} from '../../mutations';
 import Exito from '../Alertas/Exito';
+import Paginador from '../Paginador';
 
 class Productos extends Component {
+    limite = 2;
+
     state = { 
+        paginador :{
+            offset: 0,
+            actual: 1
+        },    
         alerta:{
             mostrar: false,
             mensaje: ''
         }
     }
+  
+    paginaAnterior = () => {
+        this.setState({
+            paginador: {
+                offset: this.state.paginador.offset - this.limite,
+                actual: this.state.paginador.actual - 1
+            }
+        });
+    }
+
+    paginaSiguiente = () => {
+        this.setState({
+            paginador: {
+                offset: this.state.paginador.offset + this.limite,
+                actual: this.state.paginador.actual + 1
+            }
+        });
+    }
+
     render() { 
 
         const {alerta:{mostrar, mensaje}} = this.state;
@@ -19,7 +45,7 @@ class Productos extends Component {
         let alerta = (mostrar) ? <Exito mensaje={mensaje}/> : '';
 
         return (
-            <Query query={PRODUCTOS_QUERY} pollInterval={500}>
+            <Query query={PRODUCTOS_QUERY} pollInterval={500} variables={{limit: this.limite, offset: this.state.paginador.offset}}> 
                 {({ loading, error, data, startPolling, stopPolling }) => {
                     if(loading) return "Cargando...";
                     if(error) return `Error: ${error.message}`;
@@ -104,6 +130,13 @@ class Productos extends Component {
                                     })}
                                 </tbody>
                             </table>
+                            <Paginador 
+                                actual={this.state.paginador.actual}
+                                total={data.totalProductos}
+                                limite={this.limite}
+                                paginaAnterior={this.paginaAnterior}
+                                paginaSiguiente={this.paginaSiguiente}
+                            />
                         </Fragment>
                     )
                 }}

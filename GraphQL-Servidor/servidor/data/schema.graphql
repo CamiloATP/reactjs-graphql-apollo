@@ -31,6 +31,7 @@ type Query {
     totalClientes: String
     getProductos(limit: Int, offset: Int): [Producto]
     getProducto(id: ID): Producto
+    totalProductos: String
 }
 
 """ Asigna la categoría del Cliente """

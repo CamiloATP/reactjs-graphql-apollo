@@ -20,7 +20,7 @@ class EditarProducto extends Component {
                         if(loading) return "Cargando";
                         if(error) return `Error ${error.message}`;
 
-                        console.log(data.getProducto);
+                        // console.log(data.getProducto);
 
                         return(
                             <FormularioEditarProducto 
