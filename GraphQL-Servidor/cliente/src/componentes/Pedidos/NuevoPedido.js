@@ -39,7 +39,7 @@ class NuevoPedido extends Component {
 
                                 if(error) return `Error, ${error.message}`;
 
-                                console.log(data.getProductos);
+                                // console.log(data.getProductos);
 
                                 return (
                                     <ContenidoPedido

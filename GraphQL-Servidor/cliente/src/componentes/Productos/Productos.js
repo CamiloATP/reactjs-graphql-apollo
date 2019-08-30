@@ -80,7 +80,7 @@ class Productos extends Component {
                                                         mutation={ELIMINAR_PRODUCTO}
                                                         onCompleted={(data) => {
                                                             // Recibe data del EliminarProducto en GraphQL
-                                                            console.log(data);
+                                                            // console.log(data);
 
                                                             this.setState({
                                                                 alerta:{
