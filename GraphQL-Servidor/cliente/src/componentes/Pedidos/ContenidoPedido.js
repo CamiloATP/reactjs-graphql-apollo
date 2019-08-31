@@ -5,7 +5,8 @@ import Resumen from './Resumen';
 
 class ContenidoPedido extends Component {
     state = { 
-        productos: []
+        productos: [],
+        total: 0
     }
 
     // Por default recibe productos del Select
@@ -18,12 +19,28 @@ class ContenidoPedido extends Component {
 
     actualizarCantidad = (cantidad, index) => {
         // console.log(cantidad);
-
+        let nuevoTotal = 0;
+        
         // Leer el state de productos
         const productos = this.state.productos;
         
+        // Cuando no se selecciona un producto o se elimina
+        if(productos.length === 0)
+        {
+            this.setState({
+                total: nuevoTotal
+            });
+
+            // Para salir de la función
+            return;
+        }
+
+        // Agregar la cantidad desde la interfaz
         productos[index].cantidad = Number(cantidad);
-        console.log(productos);
+        // console.log(productos);
+
+        // Realizar la operación de (precio x cantidad)
+        productos.map(producto => nuevoTotal += (producto.precio * producto.cantidad));
         
         // Actualizar la cantidad de los productos
 
@@ -31,7 +48,8 @@ class ContenidoPedido extends Component {
 
         // Agregamos al state los productos seleccionados
         this.setState({
-            productos
+            productos,
+            total: nuevoTotal
         });
     }
 
@@ -53,6 +71,12 @@ class ContenidoPedido extends Component {
                     productos={this.state.productos}
                     actualizarCantidad={this.actualizarCantidad}
                 />
+                <p className="font-weight-bold float-right mt-3">
+                    Totatl:
+                    <span className="font-weight-normal">
+                        $ {this.state.total}
+                    </span>
+                </p>
             </Fragment>
         );
     }
