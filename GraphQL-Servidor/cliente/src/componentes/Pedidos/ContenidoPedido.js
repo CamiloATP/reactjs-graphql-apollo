@@ -15,6 +15,26 @@ class ContenidoPedido extends Component {
         });
         // console.log(`Algo pasó con `, productos);
     }
+
+    actualizarCantidad = (cantidad, index) => {
+        // console.log(cantidad);
+
+        // Leer el state de productos
+        const productos = this.state.productos;
+        
+        productos[index].cantidad = Number(cantidad);
+        console.log(productos);
+        
+        // Actualizar la cantidad de los productos
+
+        // Validamos
+
+        // Agregamos al state los productos seleccionados
+        this.setState({
+            productos
+        });
+    }
+
     render() { 
         return ( 
             <Fragment>
@@ -31,6 +51,7 @@ class ContenidoPedido extends Component {
 
                 <Resumen 
                     productos={this.state.productos}
+                    actualizarCantidad={this.actualizarCantidad}
                 />
             </Fragment>
         );
