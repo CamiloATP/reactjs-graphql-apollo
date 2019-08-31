@@ -6,7 +6,11 @@ const Resumen = (props) => {
     const productos = props.productos;
     
     // Si se borra los productos agregados, se produce un error
-    if (productos.length === 0 ) return null;
+    // if (productos.length === 0 ) return null; // Error puede leer el largo de null
+    if(productos === null) return null; // <-- Good
+    if(productos.length === 0) return null;
+
+    console.log(productos);
 
     return ( 
         <Fragment>
@@ -29,6 +33,7 @@ const Resumen = (props) => {
                             producto={item}
                             index={i}
                             actualizarCantidad={props.actualizarCantidad}
+                            eliminarProducto={props.eliminarProducto}
                         />
                     ))}
                 </tbody>

@@ -23,6 +23,7 @@ class Producto extends Component {
                         <button 
                             type="button"
                             className="btn btn-danger"
+                            onClick={e => this.props.eliminarProducto(producto.id)}
                         >
                             &times; Eliminar    
                         </button>

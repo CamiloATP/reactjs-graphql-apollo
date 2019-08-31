@@ -17,30 +17,40 @@ class ContenidoPedido extends Component {
         // console.log(`Algo pasó con `, productos);
     }
 
-    actualizarCantidad = (cantidad, index) => {
-        // console.log(cantidad);
-        let nuevoTotal = 0;
-        
+    actualizarTotal = () => {
         // Leer el state de productos
         const productos = this.state.productos;
-        
-        // Cuando no se selecciona un producto o se elimina
+
+        // Cuando no se selecciona un producto o se elimina            
         if(productos.length === 0)
         {
             this.setState({
-                total: nuevoTotal
+                total: 0
             });
-
+            
             // Para salir de la función
             return;
         }
+        
+        let nuevoTotal = 0;
+
+        // Realizar la operación de (precio x cantidad)
+        productos.map(producto => nuevoTotal += (producto.precio * producto.cantidad));
+        
+        this.setState({
+            total: nuevoTotal
+        });
+    }
+
+    actualizarCantidad = (cantidad, index) => {
+        
+        // Leer el state de productos
+        const productos = this.state.productos;        
 
         // Agregar la cantidad desde la interfaz
         productos[index].cantidad = Number(cantidad);
         // console.log(productos);
 
-        // Realizar la operación de (precio x cantidad)
-        productos.map(producto => nuevoTotal += (producto.precio * producto.cantidad));
         
         // Actualizar la cantidad de los productos
 
@@ -48,8 +58,24 @@ class ContenidoPedido extends Component {
 
         // Agregamos al state los productos seleccionados
         this.setState({
-            productos,
-            total: nuevoTotal
+            productos
+        }, () => {
+            this.actualizarTotal();
+        });
+    }
+
+    eliminarProducto = (id) => {
+        // console.log(id);
+
+        const productos = this.state.productos;
+
+        // Asigna todos los registro menos el recibido por el id
+        const productosRestantes = productos.filter(producto => producto.id !== id);
+
+        this.setState({
+            productos: productosRestantes
+        }, () => {
+            this.actualizarTotal();
         });
     }
 
@@ -65,11 +91,13 @@ class ContenidoPedido extends Component {
                     placeholder={'Seleccionar Productos'}
                     getOptionValue={(options) => options.id}
                     getOptionLabel={(options) => options.nombre}
+                    value={this.state.productos}
                 />
 
                 <Resumen 
                     productos={this.state.productos}
                     actualizarCantidad={this.actualizarCantidad}
+                    eliminarProducto={this.eliminarProducto}
                 />
                 <p className="font-weight-bold float-right mt-3">
                     Totatl:
