@@ -38,6 +38,19 @@ const productoSchema = new mongoose.Schema(
 // Por defecto se crea la tabla con una s al final con Mongo Compass Community
 const Producto = mongoose.model('productos', productoSchema);
 
-// NOTE: se utiliza Robo 3T tambien como gestor de base de datos. NoSQL
+//Pedidos
+const pedidosSchema = new mongoose.Schema(
+    {
+        pedido: Array,
+        total: Number,
+        fecha: Date,
+        cliente: String,
+        estado: String
+    }
+);
 
-export { Cliente, Producto } ;
+const Pedido = mongoose.model('Pedidos', pedidosSchema);
+
+
+// NOTE: se utiliza Robo 3T tambien como gestor de base de datos. NoSQL
+export { Cliente, Producto, Pedido } ;
