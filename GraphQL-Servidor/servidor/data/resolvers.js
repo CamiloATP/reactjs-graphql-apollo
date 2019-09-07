@@ -138,6 +138,17 @@ export const resolvers = {
             nuevoPedido.id = nuevoPedido._id;
 
             return new Promise((resolve, object) => {
+
+                input.pedido.forEach(pedido => {
+                    Producto.updateOne({_id : pedido.id},
+                        {
+                            "$inc" : {"stock" : - pedido.cantidad}
+                        }, function(error){
+                            if(error) return new Error(error);
+                        }
+                    );
+                });
+
                 nuevoPedido.save((error) => {
                     if(error) rejects(error);
                     else resolve(nuevoPedido);
