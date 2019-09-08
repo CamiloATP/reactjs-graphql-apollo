@@ -10,7 +10,7 @@ const Resumen = (props) => {
     if(productos === null) return null; // <-- Good
     if(productos.length === 0) return null;
 
-    console.log(productos);
+    // console.log(productos);
 
     return ( 
         <Fragment>

@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Select from 'react-select';
 import Animated from 'react-select/animated';
 import Resumen from './Resumen';
+import GenerarPedido from './GenerarPedido';
 
 class ContenidoPedido extends Component {
     state = { 
@@ -105,6 +106,11 @@ class ContenidoPedido extends Component {
                         $ {this.state.total}
                     </span>
                 </p>
+                <GenerarPedido 
+                    productos={this.state.productos}
+                    total={this.state.total}
+                    id_cliente={this.props.id} // <-- ID cliente desde NuevoPedido
+                />
             </Fragment>
         );
     }
