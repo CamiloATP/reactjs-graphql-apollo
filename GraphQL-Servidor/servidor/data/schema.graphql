@@ -35,12 +35,18 @@ type PedidoProducto{
 }
 
 type Query {
+    # Clientes
     getClientes(limit: Int, offset: Int): [Cliente]
     getCliente(id: ID): Cliente
     totalClientes: String
+
+    # Productos
     getProductos(limit: Int, offset: Int, stock: Boolean): [Producto]
     getProducto(id: ID): Producto
     totalProductos: String
+
+    #Pedidos
+    getPedidos(cliente: String): [Pedido]
 }
 
 """ Asigna la categoría del Cliente """

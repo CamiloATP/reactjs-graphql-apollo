@@ -40,7 +40,7 @@ export const resolvers = {
                 });
             });
         },
-        totalProductos : (root) => {
+        totalProductos: (root) => {
             return new Promise((resolve, object) => {
                 Producto.countDocuments({}, (error, count) => {
                     if(error) rejects(error);
@@ -48,6 +48,14 @@ export const resolvers = {
                 });
             });
         },
+        getPedidos: (root, {cliente}) => {
+            return new Promise((resolve, object) => {
+                Pedido.find({cliente: cliente}, (error, pedido) => {
+                    if(error) rejects(error);
+                    else resolve(pedido);
+                });
+            });
+        }
     },
     Mutation: {
         crearCliente: (root, {input}) => {

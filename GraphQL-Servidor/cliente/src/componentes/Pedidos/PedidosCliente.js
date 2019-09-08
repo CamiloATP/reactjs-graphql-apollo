@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
-const PedidosCliente = () => {
+const PedidosCliente = (props) => {
+
+    const id_cliente = props.match.params.id;
+
+    console.log(id_cliente);
+    
     return (
-        <h1>Pedidos Cliente</h1>
+        <Fragment>
+            <h1 className="text-center mb-5">Pedidos Cliente</h1>
+            <div className="row">
+                <p>Pedidos</p>
+            </div>
+        </Fragment>
     );
 }
  
