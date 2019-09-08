@@ -64,15 +64,18 @@ class Clientes extends Component {
                                         return(
                                             <li key={item.id} className="list-group-item">
                                                 <div className="row justify-content-between align-items-center">
-                                                    <div className="col-md-7 d-flex justify-content-between align-items-center">
+                                                    <div className="col-md-6 d-flex justify-content-between align-items-center">
                                                         {item.nombre} {item.apellido} - {item.empresa}
                                                     </div>
-                                                    <div className="col-md-5 d-flex justify-content-end align-items-center">
+                                                    <div className="col-md-6 d-flex justify-content-end align-items-center">
                                                         <Link 
                                                             to={`pedidos/nuevo/${id}`} 
                                                             className="btn btn-warning d-block d-md-inline-block mr-2"
                                                         > &#43; Nuevo Pedido</Link>
-
+                                                        <Link 
+                                                            to={`pedidos/${id}`} 
+                                                            className="btn btn-primary d-block d-md-inline-block mr-2"
+                                                        > &#43; Ver Pedido</Link>
                                                         <Mutation mutation={ELIMINAR_CLIENTE}
                                                             onCompleted={(data) => {
                                                                 // Recibe data del EliminarProducto en GraphQL
