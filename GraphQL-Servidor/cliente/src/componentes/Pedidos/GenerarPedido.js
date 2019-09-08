@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 
 
 const validarPedido = (props) => {
-    let valido = !props.productos || props.total === 0;
+    let valido = !props.productos || props.total <= 0;
 
     return valido;
 }
