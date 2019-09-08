@@ -21,7 +21,7 @@ class NuevoPedido extends Component {
                         />
                     </div>
                     <div className="col-md-9">
-                        <Query query={PRODUCTOS_QUERY}>
+                        <Query query={PRODUCTOS_QUERY} variables={{stock: true}}>
                             {({loading, error, data}) => {
                                 if(loading) return(
                                     <div className="sk-cube-grid">

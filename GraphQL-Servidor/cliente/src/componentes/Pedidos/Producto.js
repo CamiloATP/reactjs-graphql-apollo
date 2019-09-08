@@ -13,7 +13,8 @@ class Producto extends Component {
                     <td>$ {producto.precio}</td>
                     <td>{producto.stock}</td>
                     <td>
-                        <input 
+                        <input
+                            min="1"
                             type="number" 
                             className="form-control"
                             onChange={e => {
