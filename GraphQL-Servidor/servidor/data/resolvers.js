@@ -151,15 +151,15 @@ export const resolvers = {
 
             return new Promise((resolve, object) => {
 
-                input.pedido.forEach(pedido => {
-                    Producto.updateOne({_id : pedido.id},
-                        {
-                            "$inc" : {"stock" : - pedido.cantidad}
-                        }, function(error){
-                            if(error) return new Error(error);
-                        }
-                    );
-                });
+                // input.pedido.forEach(pedido => {
+                //     Producto.updateOne({_id : pedido.id},
+                //         {
+                //             "$inc" : {"stock" : - pedido.cantidad}
+                //         }, function(error){
+                //             if(error) return new Error(error);
+                //         }
+                //     );
+                // });
 
                 nuevoPedido.save((error) => {
                     if(error) rejects(error);
@@ -169,6 +169,27 @@ export const resolvers = {
         },
         actualizarEstado: (root, {input}) => {
             return new Promise((resolve, object) => {
+
+                const {estado} = input;
+
+                let instruccion;
+
+                if(estado === 'COMPLETADO'){
+                    instruccion = '-';
+                }else if(estado === 'CANCELADO'){
+                    instruccion = '+';
+                }
+
+                input.pedido.forEach(pedido => {
+                    Producto.updateOne({_id : pedido.id},
+                        {
+                            "$inc" : {"stock" : `${instruccion}${pedido.cantidad}`}
+                        }, function(error){
+                            if(error) return new Error(error);
+                        }
+                    );
+                });
+
                 Pedido.findOneAndUpdate({_id: input.id}, input, {new:true}, (error) => {
                     if(error) rejects(error);
                     else resolve('Se actualizó correctamente');
