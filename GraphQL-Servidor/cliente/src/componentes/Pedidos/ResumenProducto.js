@@ -5,13 +5,13 @@ const ResumenProducto = ({cantidad, producto}) => {
         <Fragment>
             <div className="border mb-4 p-4">
                 <p className="card-text font-weight-bold">
-                    Nombre del producto: <span class="font-weight-normal">{producto.nombre}</span>
+                    Nombre del producto: <span className="font-weight-normal">{producto.nombre}</span>
                 </p>
                 <p className="card-text font-weight-bold">
-                    Cantidad: <span class="font-weight-normal">{cantidad}</span>
+                    Cantidad: <span className="font-weight-normal">{cantidad}</span>
                 </p>
                 <p className="card-text font-weight-bold">
-                    Precio: <span class="font-weight-normal">$ {producto.precio}</span>
+                    Precio: <span className="font-weight-normal">$ {producto.precio}</span>
                 </p>
             </div>
         </Fragment>

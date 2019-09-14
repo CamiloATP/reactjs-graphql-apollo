@@ -166,6 +166,14 @@ export const resolvers = {
                     else resolve(nuevoPedido);
                 });
             });
+        },
+        actualizarEstado: (root, {input}) => {
+            return new Promise((resolve, object) => {
+                Pedido.findOneAndUpdate({_id: input.id}, input, {new:true}, (error) => {
+                    if(error) rejects(error);
+                    else resolve('Se actualizó correctamente');
+                });
+            });
         }
     }
 }
