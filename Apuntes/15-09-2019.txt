@@ -1,0 +1,61 @@
+// Query test join
+// db.clientes.aggregate([
+//     {
+//         $lookup: {
+//             from: 'pedidos',
+//             localField: '_id',
+//             foreignField: 'cliente',
+//             as: 'pedido'
+//         }
+//     }
+// ])
+
+// Query con el estado del pedido completado
+// db.pedidos.aggregate([
+//     {
+//         $match: {estado: "COMPLETADO"}
+//     },
+//     {
+//         $lookup: {
+//             from: 'clientes',
+//             localField: 'cliente',
+//             foreignField: '_id',
+//             as: 'cliente'
+//         }
+//     }
+// ])
+
+//Query con la suma total de pedidos desendiente con un limite de 10
+// db.pedidos.aggregate([
+//     {
+//         $match: {estado: "COMPLETADO"}
+//     },
+//     {
+//         $group: {
+//             _id: "$cliente", // los trae por _id
+//             total: {$sum: "$total"}
+//         }
+//     },
+//     {
+//         $lookup: {
+//             from: 'clientes',
+//             //localField: 'cliente',
+//             localField: '_id', // <-- Se Cambia a _id
+//             foreignField: '_id',
+//             as: 'cliente'
+//         }
+//     },
+//     {
+//         $sort: {total: -1}
+//     },
+//     {
+//         $limit: 10
+//     }
+// ])
+
+---
+
+/* Para generar los gráficos */
+>cd cliente
+>npm install recharts
+

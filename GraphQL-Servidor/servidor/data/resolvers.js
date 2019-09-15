@@ -55,6 +55,38 @@ export const resolvers = {
                     else resolve(pedido);
                 });
             });
+        },
+        topClientes: (root) => {
+            return new Promise((resolve, object) => {
+                Pedido.aggregate([
+                    {
+                        $match: {estado: "COMPLETADO"}
+                    },
+                    {
+                        $group: {
+                            _id: "$cliente",
+                            total: {$sum: "$total"}
+                        }
+                    },
+                    {
+                        $lookup: {
+                            from: 'clientes',
+                            localField: '_id',
+                            foreignField: '_id',
+                            as: 'cliente'
+                        }
+                    },
+                    {
+                        $sort: {total: -1}
+                    },
+                    {
+                        $limit: 10
+                    }
+                ], (error, result) => {
+                    if(error) rejects(error);
+                    else resolve(result);
+                });
+            });
         }
     },
     Mutation: {
@@ -198,5 +230,3 @@ export const resolvers = {
         }
     }
 }
-
-

@@ -9,6 +9,11 @@ type Cliente{
     pedidos: [Pedido]
 }
 
+type ClienteTotal{
+    total: Float
+    cliente: [Cliente]
+}
+
 type Email{
     email: String
 }
@@ -46,7 +51,10 @@ type Query {
     totalProductos: String
 
     #Pedidos
-    getPedidos(cliente: String): [Pedido]
+    getPedidos(cliente: ID): [Pedido]
+
+    #Graficas
+    topClientes: [ClienteTotal]
 }
 
 """ Asigna la categoría del Cliente """

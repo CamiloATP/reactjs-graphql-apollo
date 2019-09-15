@@ -50,7 +50,7 @@ export const PRODUCTO_QUERY = gql`
 `;
 
 export const PEDIDOS_QUERY = gql`
-    query getPedidos($cliente: String){
+    query getPedidos($cliente: ID){
         getPedidos(cliente: $cliente){
             id
             fecha
@@ -60,6 +60,17 @@ export const PEDIDOS_QUERY = gql`
             pedido{
                 id
                 cantidad
+            }
+        }
+    }
+`;
+
+export const TOP_CLIENTES = gql`
+    query topClientes{
+        topClientes{
+            total
+            cliente{
+                nombre
             }
         }
     }
