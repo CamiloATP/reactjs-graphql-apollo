@@ -1,5 +1,5 @@
 import mongoose, { Promise } from 'mongoose';
-import { Cliente, Producto, Pedido } from './db';
+import { Cliente, Producto, Pedido, Usuario } from './db';
 import { rejects } from 'assert';
 import { resolve } from 'url';
 
@@ -227,6 +227,23 @@ export const resolvers = {
                     else resolve('Se actualizó correctamente');
                 });
             });
+        },
+        crearUsuario: async(roo, {usuario, password}) => {
+            // Revisar si exite el usuario
+            const existeUsuario = await Usuario.findOne({usuario});
+
+            if(existeUsuario)
+            {
+                throw new Error('El usuario ya se encuentra registrado');
+            }
+
+            const nuevoUsuario = await new Usuario({
+                usuario,
+                password
+            }).save();
+
+            // console.log(nuevoUsuario);
+            return "Creado Correctamente";
         }
     }
 }

@@ -52,6 +52,16 @@ const pedidosSchema = new mongoose.Schema(
 
 const Pedido = mongoose.model('Pedidos', pedidosSchema);
 
+// Usuarios
+
+const usuarioSchema = new mongoose.Schema(
+    {
+        usuario: String,
+        password: String
+    }
+);
+
+const Usuario = mongoose.model('usuarios', usuarioSchema);
 
 // NOTE: se utiliza Robo 3T tambien como gestor de base de datos. NoSQL
-export { Cliente, Producto, Pedido } ;
+export { Cliente, Producto, Pedido, Usuario } ;
