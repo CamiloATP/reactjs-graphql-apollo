@@ -1,7 +1,7 @@
 import React from 'react';
 import {Query} from 'react-apollo';
 import {TOP_CLIENTES} from './../../queries';
-import {BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts';
 
 
 const Clientes = () => {
@@ -20,6 +20,7 @@ const Clientes = () => {
                         ...pedido.cliente[0],
                         total: pedido.total
                     }
+                    return ('');
                 })
 
                 return(

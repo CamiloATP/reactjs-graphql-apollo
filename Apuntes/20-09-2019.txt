@@ -1,0 +1,12 @@
+bcrypt
+> npm install --save bcrypt
+
+node-gyp para instalar bcrypt
+> npm install -g node-gyp
+>node-gyp install --fallback-to-build
+
+Despues de esto de nuevo
+> npm install --save bcrypt
+
+para solucionar la vunerabiliddades del paquete.
+> npm audit fix

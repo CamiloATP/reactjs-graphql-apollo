@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 // If we want to use mongoose in different position inside the codes
 mongoose.Promise = global.Promise;
@@ -60,6 +61,26 @@ const usuarioSchema = new mongoose.Schema(
         password: String
     }
 );
+
+// Antes de guardar en la base de datos
+usuarioSchema.pre('save', function(next) {
+    // Si el password no esta modificado
+    if(!this.isModified('password'))
+    {
+        return next();
+    }
+
+    bcrypt.genSalt(10, (error, salt) => {
+        if(error) return next(error);
+
+        bcrypt.hash(this.password, salt, (error, hash) => {
+            if(error) return next(error);
+
+            this.password = hash;
+            next();
+        });
+    });
+});
 
 const Usuario = mongoose.model('usuarios', usuarioSchema);
 
