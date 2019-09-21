@@ -39,6 +39,10 @@ type PedidoProducto{
     cantidad: Int
 }
 
+type Token{
+    token: String!
+}
+
 type Query {
     # Clientes
     getClientes(limit: Int, offset: Int): [Cliente]
@@ -123,4 +127,5 @@ type Mutation{
     actualizarEstado(input: PedidoInput): String
     #Usuarios
     crearUsuario(usuario: String!, password: String!): String
+    autenticarUsuario(usuario: String!, password: String!): Token
 }

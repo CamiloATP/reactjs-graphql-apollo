@@ -10,3 +10,13 @@ Despues de esto de nuevo
 
 para solucionar la vunerabiliddades del paquete.
 > npm audit fix
+
+---
+
+Generar el token para autenticar usuario
+> npm install dotenv jsonwebtoken
+> npm audit fix
+
+dotenv = permite importar un archivo de configuración que contiene el string secreto.
+
+jsonwebtoken = para crear el token.

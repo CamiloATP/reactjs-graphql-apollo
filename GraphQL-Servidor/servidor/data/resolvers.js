@@ -1,7 +1,8 @@
 import mongoose, { Promise } from 'mongoose';
 import { Cliente, Producto, Pedido, Usuario } from './db';
 import { rejects } from 'assert';
-import { resolve } from 'url';
+// import { resolve } from 'url';
+import bcrypt from 'bcrypt';
 
 export const resolvers = {
     // Sintaxis de graphql-tools.
@@ -244,6 +245,21 @@ export const resolvers = {
 
             // console.log(nuevoUsuario);
             return "Creado Correctamente";
+        },
+        autenticarUsuario: async (root, {usuario, password}) => {
+            const nombreUsuario = await Usuario.findOne({usuario});
+
+            if(!nombreUsuario)
+            {
+                throw new Error('Usuario no encontrado');
+            }
+
+            const passwordCorrecto = await bcrypt.compare(password, nombreUsuario.password);
+
+            if(!passwordCorrecto)
+            {
+                throw new Error('Password Incorrecto');
+            }
         }
     }
 }
