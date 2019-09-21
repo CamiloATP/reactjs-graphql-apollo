@@ -260,6 +260,10 @@ export const resolvers = {
             {
                 throw new Error('Password Incorrecto');
             }
+
+            return {
+                token: "Este será el token"
+            }
         }
     }
 }
