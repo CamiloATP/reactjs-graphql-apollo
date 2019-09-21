@@ -3,6 +3,15 @@ import { Cliente, Producto, Pedido, Usuario } from './db';
 import { rejects } from 'assert';
 // import { resolve } from 'url';
 import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+dotenv.config({path: 'variables.env'});
+
+const crearToken = (usuarioLogin, secreto, expiresIn) => {
+    const {usuario} = usuarioLogin;
+    return jwt.sign({usuario}, secreto, {expiresIn});
+}
 
 export const resolvers = {
     // Sintaxis de graphql-tools.
@@ -88,8 +97,21 @@ export const resolvers = {
                     else resolve(result);
                 });
             });
+        },
+        getUsuario: (root, args, {usuarioActual}) => {
+            if(!usuarioActual)
+            {
+                return null;
+            }
+
+            console.log(usuarioActual);
+
+            const usuario = Usuario.findOne({usuario: usuarioActual.usuario});
+
+            return usuario;
         }
     },
+
     Mutation: {
         crearCliente: (root, {input}) => {
             // Se crear una nueva instacia del objeto Cliente.
@@ -262,7 +284,7 @@ export const resolvers = {
             }
 
             return {
-                token: "Este será el token"
+                token: crearToken(nombreUsuario, process.env.SECRETO, '1hr')
             }
         }
     }

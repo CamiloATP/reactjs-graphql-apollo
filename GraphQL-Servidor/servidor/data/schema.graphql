@@ -43,6 +43,10 @@ type Token{
     token: String!
 }
 
+type Usuario{
+    usuario: String
+}
+
 type Query {
     # Clientes
     getClientes(limit: Int, offset: Int): [Cliente]
@@ -59,6 +63,9 @@ type Query {
 
     #Graficas
     topClientes: [ClienteTotal]
+
+    #usuarios
+    getUsuario: Usuario
 }
 
 """ Asigna la categoría del Cliente """
