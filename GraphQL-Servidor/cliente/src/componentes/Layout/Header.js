@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
+import CerrrarSession from './CerrarSession';
 
 const Header = ({session}) => {
 
@@ -59,6 +60,7 @@ const NavegacionAutenticado = () => (
                         </Link>
                     </div>
                 </li>
+                <CerrrarSession />
             </ul>
         </div>
     </Fragment>
