@@ -1,0 +1,26 @@
+// Query los mejores vendedores
+db.pedidos.aggregate([
+    {
+        $match: {estado: "COMPLETADO"}
+    },
+    {
+        $group:{
+            _id: "$vendedor",
+            total: {$sum: "$total"}
+        }
+    },
+    {
+        $lookup:{
+            from: "usuarios",
+            localField: '_id',
+            foreignField: '_id',
+            as: 'vendedor'
+        }
+    },
+    {
+        $sort: {total: -1}
+    },
+    {
+        $limit: 10
+    }
+])

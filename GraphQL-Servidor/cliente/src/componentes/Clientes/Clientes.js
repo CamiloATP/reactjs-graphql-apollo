@@ -75,7 +75,7 @@ class Clientes extends Component {
                     if(loading) return "Cargando...";
                     if(error) return `Error: ${error.message}`;
 
-                    // console.table(data);
+                    console.table(data);
 
                     return (
                         <Fragment>

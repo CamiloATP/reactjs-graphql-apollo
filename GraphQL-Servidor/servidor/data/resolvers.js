@@ -37,9 +37,18 @@ export const resolvers = {
                 });
             });
         },
-        totalClientes : (root) => {
+        totalClientes : (root, {vendedor}) => {
+
+            let filtro;
+
+            if(vendedor)
+            {
+                filtro = {vendedor: new ObjectId(vendedor)}
+            }
+
             return new Promise((resolve, object) => {
-                Cliente.countDocuments({}, (error, count) => {
+
+                Cliente.countDocuments(filtro, (error, count) => {
                     if(error) rejects(error);
                     else resolve(count);
                 });
@@ -119,9 +128,40 @@ export const resolvers = {
             const usuario = Usuario.findOne({usuario: usuarioActual.usuario});
 
             return usuario;
-        }
+        },
+        topVendedores: (root) => {
+            return new Promise((resolve, object) => {
+                Pedido.aggregate([
+                    {
+                        $match: {estado: "COMPLETADO"}
+                    },
+                    {
+                        $group:{
+                            _id: "$vendedor",
+                            total: {$sum: "$total"}
+                        }
+                    },
+                    {
+                        $lookup:{
+                            from: "usuarios",
+                            localField: '_id',
+                            foreignField: '_id',
+                            as: 'vendedor'
+                        }
+                    },
+                    {
+                        $sort: {total: -1}
+                    },
+                    {
+                        $limit: 10
+                    }
+                ], (error, result) => {
+                    if(error) rejects(error);
+                    else resolve(result);
+                });
+            });
+        },
     },
-
     Mutation: {
         crearCliente: (root, {input}) => {
             // Se crear una nueva instacia del objeto Cliente.
@@ -210,7 +250,8 @@ export const resolvers = {
                 total: input.total,
                 fecha: new Date(),
                 cliente: input.cliente,
-                estado: "PENDIENTE"
+                estado: "PENDIENTE",
+                vendedor: input.vendedor
             });
 
             nuevoPedido.id = nuevoPedido._id;
@@ -302,3 +343,5 @@ export const resolvers = {
         }
     }
 }
+
+

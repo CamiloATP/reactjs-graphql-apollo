@@ -14,6 +14,11 @@ type ClienteTotal{
     cliente: [Cliente]
 }
 
+type VendedorTotal{
+    total: Float
+    vendedor: [Usuario]
+}
+
 type Email{
     email: String
 }
@@ -54,7 +59,7 @@ type Query {
     # Clientes
     getClientes(limit: Int, offset: Int, vendedor: String): [Cliente]
     getCliente(id: ID): Cliente
-    totalClientes: String
+    totalClientes(vendedor: String): String
 
     # Productos
     getProductos(limit: Int, offset: Int, stock: Boolean): [Producto]
@@ -66,6 +71,7 @@ type Query {
 
     #Graficas
     topClientes: [ClienteTotal]
+    topVendedores: [VendedorTotal]
 
     #usuarios
     getUsuario: Usuario
@@ -115,6 +121,7 @@ input PedidoInput{
     fecha: String
     cliente: ID
     estado: EstadoPedido
+    vendedor: ID
 }
 
 input PedidoProductoInput{

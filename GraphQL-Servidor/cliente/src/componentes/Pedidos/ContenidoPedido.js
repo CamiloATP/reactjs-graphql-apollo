@@ -116,6 +116,7 @@ class ContenidoPedido extends Component {
                     productos={this.state.productos}
                     total={this.state.total}
                     id_cliente={this.props.id} // <-- ID cliente desde NuevoPedido
+                    idVendedor={this.props.idVendedor}
                 />
             </Fragment>
         );

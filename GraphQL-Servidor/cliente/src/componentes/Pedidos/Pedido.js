@@ -3,6 +3,7 @@ import {Query, Mutation} from 'react-apollo';
 import {PRODUCTO_QUERY} from './../../queries';
 import {ACTUALIZAR_ESTADO} from './../../mutations';
 import ResumenProducto from './ResumenProducto';
+import './../../pedidos.css';
 
 const Pedido = (props) => {
 
@@ -70,7 +71,7 @@ const Pedido = (props) => {
                         <span className="font-weight-normal">$ {pedido.total}</span>
                     </p>
 
-                    <h3 className="card-text text-center mb-3">Artículos del pedido</h3>
+                    <h3 className="card-text text-center mb-3 resaltar-texto">Artículos del pedido</h3>
                     {pedido.pedido.map((producto, index) => {
 
                         const {id} = producto;
@@ -94,6 +95,11 @@ const Pedido = (props) => {
                             </Query>    
                         );
                     })}
+
+                    <div className="d-flex align-items-center justify-content-end">
+                        <p className="card-text resaltar-texto mr-1 bg-amarillo">Total:</p>
+                        <p className="font-weight-normal inc-texto"> $ {pedido.total}</p>
+                    </div>
                 </div>
             </div>
         </div>

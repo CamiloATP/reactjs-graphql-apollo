@@ -48,7 +48,8 @@ const pedidosSchema = new mongoose.Schema(
         fecha: Date,
         // cliente: String,
         cliente: mongoose.Types.ObjectId,
-        estado: String
+        estado: String,
+        vendedor: mongoose.Types.ObjectId
     }
 );
 
