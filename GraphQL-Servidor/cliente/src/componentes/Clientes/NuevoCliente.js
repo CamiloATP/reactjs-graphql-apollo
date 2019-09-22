@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {NUEVO_CLIENTE} from '../../mutations';
 import {Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
 
 class NuevoCliente extends Component {
     state = {
@@ -48,6 +49,11 @@ class NuevoCliente extends Component {
     }
 
     render() { 
+
+        // console.log(this.props.session.getUsuario.id);
+
+        const idVendedor = this.props.session.getUsuario.id;
+
         const {error} = this.state;
 
         let respuesta = (error) ? <p className="alert alert-danger p-3 text-center">Ingrese los campos obligatorios (*)</p>: '';
@@ -90,7 +96,8 @@ class NuevoCliente extends Component {
                                             empresa,
                                             edad: Number(edad),
                                             emails,
-                                            tipo
+                                            tipo,
+                                            vendedor: idVendedor
                                         }
 
                                         console.table(input);
@@ -234,4 +241,4 @@ class NuevoCliente extends Component {
     }
 }
  
-export default NuevoCliente;
+export default withRouter(NuevoCliente);

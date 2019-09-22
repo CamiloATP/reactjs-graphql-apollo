@@ -13,11 +13,21 @@ const crearToken = (usuarioLogin, secreto, expiresIn) => {
     return jwt.sign({usuario}, secreto, {expiresIn});
 }
 
+const ObjectId = mongoose.Types.ObjectId;
+
 export const resolvers = {
     // Sintaxis de graphql-tools.
     Query: {
-        getClientes: (root, {limit, offset}) => {
-            return Cliente.find({}).limit(limit).skip(offset);
+        getClientes: (root, {limit, offset, vendedor}) => {
+
+            let filtro;
+
+            if(vendedor)
+            {
+                filtro = {vendedor: new ObjectId(vendedor)}
+            }
+
+            return Cliente.find(filtro).limit(limit).skip(offset);
         },
         getCliente: (root, {id}) => {
             return new Promise((resolve, object) => {
@@ -122,7 +132,8 @@ export const resolvers = {
                 emails: input.emails,
                 edad: input.edad,
                 tipo: input.tipo,
-                pedidos: input.pedidos
+                pedidos: input.pedidos,
+                vendedor: input.vendedor
             });
             // Mongo agrega automaticamente el id con _id
             nuevoCliente.id = nuevoCliente._id;
@@ -251,7 +262,7 @@ export const resolvers = {
                 });
             });
         },
-        crearUsuario: async(roo, {usuario, password}) => {
+        crearUsuario: async(roo, {usuario, nombre, password, rol}) => {
             // Revisar si exite el usuario
             const existeUsuario = await Usuario.findOne({usuario});
 
@@ -262,7 +273,9 @@ export const resolvers = {
 
             const nuevoUsuario = await new Usuario({
                 usuario,
-                password
+                nombre,
+                password,
+                rol
             }).save();
 
             // console.log(nuevoUsuario);

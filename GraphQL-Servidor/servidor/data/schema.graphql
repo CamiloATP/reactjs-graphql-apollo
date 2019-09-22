@@ -44,12 +44,15 @@ type Token{
 }
 
 type Usuario{
-    usuario: String
+    id: ID
+    usuario: String,
+    nombre: String,
+    rol: String
 }
 
 type Query {
     # Clientes
-    getClientes(limit: Int, offset: Int): [Cliente]
+    getClientes(limit: Int, offset: Int, vendedor: String): [Cliente]
     getCliente(id: ID): Cliente
     totalClientes: String
 
@@ -95,6 +98,7 @@ input ClienteInput{
     edad: Int!
     tipo: TipoCliente
     pedidos: [PedidoInput]
+    vendedor: ID
 }
 
 input ProductoInput {
@@ -133,6 +137,6 @@ type Mutation{
     nuevoPedido(input: PedidoInput): Pedido
     actualizarEstado(input: PedidoInput): String
     #Usuarios
-    crearUsuario(usuario: String!, password: String!): String
+    crearUsuario(usuario: String!, nombre: String! ,password: String!, rol: String!): String
     autenticarUsuario(usuario: String!, password: String!): Token
 }

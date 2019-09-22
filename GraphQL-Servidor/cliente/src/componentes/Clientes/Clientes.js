@@ -45,13 +45,37 @@ class Clientes extends Component {
 
         let alerta = (mostrar) ? <Exito mensaje={mensaje}/> : '';
 
+        // Obtener el id del vendedor
+        // console.log(this.props.session.getUsuario.id);
+
+        let id_usuario;
+
+        const {rol} = this.props.session.getUsuario;
+
+        if(rol === 'Vendedor')
+        {
+            id_usuario = this.props.session.getUsuario.id;
+        }else{
+            id_usuario = '';
+        }
+
         return(
-            <Query query={CLIENTES_QUERY} pollInterval={500} variables={{limite: this.limite, offset: this.state.paginador.offset}}>
+            <Query 
+                query={CLIENTES_QUERY} 
+                pollInterval={500} 
+                variables={
+                    {   
+                        limite: this.limite, 
+                        offset: this.state.paginador.offset,
+                        vendedor: id_usuario
+                    }
+                }
+            >
                 {({ loading, error, data, startPolling, stopPolling }) => {
                     if(loading) return "Cargando...";
                     if(error) return `Error: ${error.message}`;
 
-                    console.table(data);
+                    // console.table(data);
 
                     return (
                         <Fragment>

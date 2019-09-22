@@ -1,10 +1,11 @@
 import React, {Fragment} from 'react';
 import { Link } from 'react-router-dom';
 import CerrrarSession from './CerrarSession';
+import BotonRegistro from './BotonRegistro';
 
 const Header = ({session}) => {
 
-    let barra = (session.getUsuario) ? <NavegacionAutenticado /> :  <NavegacionNoAutenticado />;
+    let barra = (session.getUsuario) ? <NavegacionAutenticado session={session}/> :  <NavegacionNoAutenticado />;
 
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between d-flex mb-3">
@@ -19,7 +20,7 @@ const NavegacionNoAutenticado = () => (
     <Link to="/" className="navbar-brand text-light font-weight-bold">CRM</Link>
 );
 
-const NavegacionAutenticado = () => (
+const NavegacionAutenticado = (session) => (
     <Fragment>
         <Link to="/" className="navbar-brand text-light font-weight-bold">CRM</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navegacion" aria-controls="navegacion" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,6 +61,7 @@ const NavegacionAutenticado = () => (
                         </Link>
                     </div>
                 </li>
+                <BotonRegistro session={session} />
                 <CerrrarSession />
             </ul>
         </div>

@@ -20,7 +20,8 @@ const clienteSchema = new mongoose.Schema(
         emails: Array,
         edad: Number,
         tipo: String,
-        pedidos: Array 
+        pedidos: Array,
+        vendedor: mongoose.Types.ObjectId
     }
 );
 
@@ -58,7 +59,9 @@ const Pedido = mongoose.model('Pedidos', pedidosSchema);
 const usuarioSchema = new mongoose.Schema(
     {
         usuario: String,
-        password: String
+        nombre: String,
+        password: String,
+        rol: String
     }
 );
 

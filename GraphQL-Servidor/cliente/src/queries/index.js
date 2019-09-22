@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const CLIENTES_QUERY = gql`
-    query getClientes($limite: Int, $offset: Int){
-        getClientes(limit: $limite, offset: $offset){
+    query getClientes($limite: Int, $offset: Int, $vendedor: String){
+        getClientes(limit: $limite, offset: $offset, vendedor: $vendedor){
             id
             nombre
             apellido
@@ -79,7 +79,10 @@ export const TOP_CLIENTES = gql`
 export const USUARIO_ACTUAL = gql`
     query getUsuario{
         getUsuario{
+            id
             usuario
+            nombre
+            rol
         }
     }
 `;
